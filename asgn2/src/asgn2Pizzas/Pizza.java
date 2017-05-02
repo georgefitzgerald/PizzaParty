@@ -86,15 +86,16 @@ public abstract class Pizza  {
 	 */
 	public final double getCostPerPizza(){
 		// TO DO
-		if(type == "Margherita"){
+		if(this.getPizzaType() == "Margherita"){
 			return margherita;
 		}
-		else if(type == "Vegetarian"){
+		else if(this.getPizzaType() == "Vegetarian"){
 			return vegetarian;
 		}
 		else{
 			return meatLovers;
 		}
+		
 		
 	}
 
@@ -113,10 +114,10 @@ public abstract class Pizza  {
 	 */
 	public final double getOrderCost(){
 		// TO DO
-		if(type == "Margherita"){
+		if(this.getPizzaType() == "Margherita"){
 			return margherita*quantity;
 		}
-		else if(type == "Vegetarian"){
+		else if(this.getPizzaType() == "Vegetarian"){
 			return vegetarian*quantity;
 		}
 		else{
@@ -130,7 +131,7 @@ public abstract class Pizza  {
 	 */
 	public final double getOrderPrice(){
 		// TO DO
-		return price*quantity;
+		return this.getPricePerPizza()*this.getQuantity();
 	}
 	
 	
