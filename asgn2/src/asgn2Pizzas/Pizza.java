@@ -7,24 +7,44 @@ import java.time.LocalTime;
  * An abstract class that represents pizzas sold at the Pizza Palace restaurant. 
  * The Pizza class is used as a base class of VegetarianPizza, MargheritaPizza and MeatLoversPizza. 
  * Each of these subclasses have a different set of toppings. A description of the class's fields
+package asgn2Pizzas;
+
+import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.List;
+
+import asgn2Exceptions.PizzaException;
+
+import asgn2Pizzas.PizzaTopping;
+
+
+/**
+ * An abstract class that represents pizzas sold at the Pizza Palace restaurant. 
+ * The Pizza class is used as a base class of VegetarianPizza, MargheritaPizza and MeatLoversPizza. 
+ * Each of these subclasses have a different set of toppings. A description of the class's fields
  * and their constraints is provided in Section 5.1 of the Assignment Specification. 
  * 
  * @author Person A
  *
  */
 public abstract class Pizza  {
+	
 	private int quantity;
 	private LocalTime orderTime;
 	private LocalTime deliveryTime;
 	private String type;
 	private double price;
-	private double margherita = 1.5;
-	private double vegetarian = 5.5;
-	private double meatLovers = 5.0;
+	private double margherita;
+	private double vegetarian;
+	private double meatLovers;
 	final int maxQuan = 10;
 	final int minOrderTime = 18;
 	final int maxOrderTime = 22;
 	final int minutes = 0;
+	
+	 
+	
+	
 	/**
 	 *  This class represents a pizza produced at the Pizza Palace restaurant.  A detailed description of the class's fields
 	 *  and parameters is provided in the Assignment Specification, in particular in Section 5.1. 
@@ -64,18 +84,17 @@ public abstract class Pizza  {
 	}
 
 	/**
-	 * Calculates how much a pizza would could to make calculated from its toppings.
+	 * Calculates how much a pizza would cost to make. calculated from its toppings.
 	 *  
      * <P> PRE: TRUE
 	 * <P> POST: The cost field is set to sum of the Pizzas's toppings
 	 */
 	public final void calculateCostPerPizza(){
 		// TO DO
-		
-		double margherita = PizzaTopping.CHEESE.getCost() + PizzaTopping.TOMATO.getCost();
-		double vegetarian = PizzaTopping.CHEESE.getCost() + PizzaTopping.TOMATO.getCost() 
+		this.margherita = PizzaTopping.CHEESE.getCost() + PizzaTopping.TOMATO.getCost();
+		this.vegetarian = PizzaTopping.CHEESE.getCost() + PizzaTopping.TOMATO.getCost() 
 		+ PizzaTopping.EGGPLANT.getCost() + PizzaTopping.MUSHROOM.getCost()+PizzaTopping.CAPSICUM.getCost();
-		double meatLovers = PizzaTopping.TOMATO.getCost()+PizzaTopping.CHEESE.getCost()
+		this.meatLovers = PizzaTopping.TOMATO.getCost()+PizzaTopping.CHEESE.getCost()
 		+PizzaTopping.BACON.getCost()+PizzaTopping.PEPPERONI.getCost()+PizzaTopping.SALAMI.getCost();
 				
 	}
@@ -95,7 +114,6 @@ public abstract class Pizza  {
 		else{
 			return meatLovers;
 		}
-		
 		
 	}
 
@@ -123,6 +141,7 @@ public abstract class Pizza  {
 		else{
 			return meatLovers*quantity;
 		}
+		
 	}
 	
 	/**
@@ -142,6 +161,7 @@ public abstract class Pizza  {
 	public final double getOrderProfit(){
 		// TO DO
 		return this.getOrderPrice()-this.getOrderCost();
+		
 	}
 	
 
@@ -152,6 +172,24 @@ public abstract class Pizza  {
 	 */
 	public final boolean containsTopping(PizzaTopping topping){
 		// TO DO
+		if(this.getPizzaType() == "Margherita"){
+			if(topping == PizzaTopping.CHEESE || topping == PizzaTopping.TOMATO){
+				return true;
+			}
+		}
+		else if(this.getPizzaType() == "Vegetarian"){
+			if(topping == PizzaTopping.CHEESE || topping == PizzaTopping.TOMATO || topping == PizzaTopping.EGGPLANT 
+					|| topping == PizzaTopping.MUSHROOM || topping == PizzaTopping.CAPSICUM){
+				return true;
+			}
+		}
+		else{
+			if(topping == PizzaTopping.CHEESE || topping == PizzaTopping.TOMATO || topping == PizzaTopping.BACON 
+					|| topping == PizzaTopping.PEPPERONI || topping == PizzaTopping.SALAMI){
+				return true;
+			}
+		}
+		return false;
 	}
 	
 	/**
