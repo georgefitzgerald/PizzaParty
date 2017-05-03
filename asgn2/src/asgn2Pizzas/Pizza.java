@@ -1,15 +1,6 @@
 package asgn2Pizzas;
 
 import java.time.LocalTime;
-
-
-/**
- * An abstract class that represents pizzas sold at the Pizza Palace restaurant. 
- * The Pizza class is used as a base class of VegetarianPizza, MargheritaPizza and MeatLoversPizza. 
- * Each of these subclasses have a different set of toppings. A description of the class's fields
-package asgn2Pizzas;
-
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
