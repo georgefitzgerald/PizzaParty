@@ -47,10 +47,13 @@ public abstract class Customer {
 				Name = name;
 			}
 		}
+		else {throw new CustomerException();}
 		
 		//field constraints: mobile number length = 10
-		else if (mobileNumber.length() == 10 && mobileNumber.startsWith("0")){
+		if (mobileNumber.length() == 10 && mobileNumber.startsWith("0")){
 			MobileNumber = mobileNumber;
+			//System.out.println("Mobile Number was " + mobileNumber);
+
 		}
 		else {throw new CustomerException();}
 

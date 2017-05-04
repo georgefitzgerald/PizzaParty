@@ -96,7 +96,7 @@ public class LogHandler {
 		//create string array for each field of line
    	    //otime, dtime, name, number, code, x, y
    	    String[] lineArr = line.split(COMMA);
-	   	    
+		//System.out.println("LogHandler: Mobile Number " + lineArr[2]);
 		return CustomerFactory.getCustomer(lineArr[4].trim(), lineArr[2], lineArr[3], Integer.parseInt(lineArr[5]), Integer.parseInt(lineArr[6]));
 	}
 

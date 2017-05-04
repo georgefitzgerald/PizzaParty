@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 
 
 import java.awt.event.ActionListener;
+import java.awt.event.MouseListener;
 import java.io.File;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -17,6 +18,7 @@ import asgn2Exceptions.PizzaException;
 import asgn2Pizzas.Pizza;
 import asgn2Restaurant.LogHandler;
 import asgn2Restaurant.PizzaRestaurant;
+import java.awt.GridBagLayout;
 
 import java.awt.*;
 import javax.swing.*;
@@ -48,7 +50,10 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 	private JButton btnLoad;
 	private JButton btnReset;
 	private JButton btnTotals;
-	private JTextArea areDisplay;
+	private JTextArea CDisplay;
+	private JTextArea PDisplay;
+	private JPanel pnlTable;
+
 	
 	//temp variable for loading using loghandler instead of pizza restuarant
     private ArrayList<Customer> customerArr = new ArrayList<Customer>();
@@ -76,23 +81,30 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLayout(new BorderLayout());
 		
-		areDisplay = displayTextArea();
+		PDisplay = displayTextArea();
+		CDisplay = displayTextArea();
 
 		pnlBtn = createPanel(Color.LIGHT_GRAY); 
 		pnlTotals = createPanel(Color.LIGHT_GRAY);
+		pnlTable = createPanel(Color.DARK_GRAY);
 		
 		this.getContentPane().add(pnlBtn,BorderLayout.NORTH);
 		this.getContentPane().add(pnlTotals,BorderLayout.SOUTH);
-		this.getContentPane().add(areDisplay,BorderLayout.CENTER);
+		this.getContentPane().add(pnlTable, BorderLayout.CENTER);
+		
 
 		btnLoad = createButton("Load"); 
 		btnReset = createButton("Reset");
 		btnTotals = createButton("Totals");
 		
-		labDist = createLabel("Total Distance:     ");
-		labProf = createLabel("Profit:     ");
+		labDist = createLabel("Total Distance: ");
+		labProf = createLabel("Total Profit: ");
+
+		
 		
 		layoutButtonPanel();
+		createTextBoxLayout();
+
 		totalsLabelPanel();
 		repaint();
 		this.setVisible(true);
@@ -168,6 +180,21 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 		addToPanel(pnlTotals, labDist,constraints,0,0,1,1);
 		addToPanel(pnlTotals, labProf,constraints,1,0,1,1);
 	}
+	
+	private void createTextBoxLayout(){
+		GridBagLayout layout = new GridBagLayout();
+		pnlTable.setLayout(layout);
+		//Lots of layout code here
+		//add components to grid
+		GridBagConstraints constraints = new GridBagConstraints();
+		//Defaults
+		constraints.fill = GridBagConstraints.HORIZONTAL;
+		constraints.anchor = GridBagConstraints.CENTER;
+		constraints.weightx = 100;
+		constraints.weighty = 100;
+		addToPanel(pnlTable, CDisplay,constraints,0,0,1,1);
+		addToPanel(pnlTable, PDisplay,constraints,1,0,1,1);
+	}
 
 	
 	/**
@@ -190,17 +217,19 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 		constraints.gridheight = h;
 		jp.add(c, constraints);
 	}
-
-
-
 	
 	private JTextArea displayTextArea(){
 
 		JTextArea tempDisplay = new JTextArea();
 		tempDisplay.setEditable(false);
 		tempDisplay.setLineWrap(true);
-		tempDisplay.setFont(new Font("Arial",Font.BOLD,24));
+		//tempDisplay.
+		tempDisplay.setFont(new Font("Arial",Font.BOLD,12));
 		tempDisplay.setBorder(BorderFactory.createEtchedBorder());
+		tempDisplay.setBackground(Color.BLACK);
+		Dimension textDim = new Dimension();
+		textDim.setSize(30, 50);
+		tempDisplay.setMinimumSize(textDim);
 		return tempDisplay;
 	}	
 	
@@ -216,8 +245,6 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 					
 					if (returnVal == JFileChooser.APPROVE_OPTION) {
 			            File file = fc.getSelectedFile();
-			            
-			            
 						//restaurant.processLog(file.getPath());
 			            
 			            //Temporary way of loading from log file
@@ -226,19 +253,22 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 						} catch (LogHandlerException | CustomerException e1) {
 							// TODO Auto-generated catch block	
 						}
-			            
 			            //Display Each Customer as line of text
-			            DisplayText();
-			            
+			            DisplayText();   
 					}
-					
-					//Total Distance (need to implement restaurant correctly)
-					if (src==labDist) {
-//						labDist.setText("Total Distance: " + restaurant.getTotalDeliveryDistance())	;
-						//"Wiring Class: Warning",JOptionPane.WARNING_MESSAGE); 
+				}
+				//Total Distance (need to implement restaurant correctly)
+				if (src==btnTotals) {
+					//restaurant.getTotalDeliveryDistance()
+					labDist.setText("Total Distance: 100" )	;
+					//"Wiring Class: Warning",JOptionPane.WARNING_MESSAGE); 
 
-					}
-				}		
+				}
+				if (src==btnReset){
+					//clear the pizza restuarant
+					//remove totals and profit
+					//clear file buffer too maybe? 
+				}
 	}
 	
 	/*
@@ -246,11 +276,31 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 	 */
 	private void DisplayText(){
 		//areDisplay.setText(customerArr.get(0).toString());
-
+		
 		for (int i = 0; i < customerArr.size(); i++){
-			areDisplay.append("\n"+customerArr.get(i).getName());
+			CDisplay.append("\n"+customerArr.get(i).getName());
+//			CDisplay.append(", " + ConvertCustCode(customerArr.get(i).getCustomerType()));
+			CDisplay.append(", " + customerArr.get(i).getCustomerType());
+
+			CDisplay.append(", " + customerArr.get(i).getMobileNumber());
+			CDisplay.append(", Dist:" + customerArr.get(i).getDeliveryDistance());
+			CDisplay.append(", X:" + customerArr.get(i).getLocationX());
+			CDisplay.append(", Y:" + customerArr.get(i).getLocationY());
 		}
 
+	}
+	
+	private String ConvertCustCode(String code){
+		if (code.equals("PUD")){
+			return "Pick UP";
+		}
+		else if (code.equals("DVC")){
+			return "Delivery Driver";
+		}
+		else if (code.equals("DNC")){
+			return "Drone Delivery";
+		}
+		else return null;
 	}
 	
 	/*
