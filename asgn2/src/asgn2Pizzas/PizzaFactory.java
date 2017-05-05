@@ -2,6 +2,11 @@ package asgn2Pizzas;
 
 import java.time.LocalTime;
 
+import asgn2Customers.Customer;
+import asgn2Customers.DriverDeliveryCustomer;
+import asgn2Customers.DroneDeliveryCustomer;
+import asgn2Customers.PickUpCustomer;
+import asgn2Exceptions.CustomerException;
 import asgn2Exceptions.PizzaException;
 
 /**
@@ -14,7 +19,6 @@ import asgn2Exceptions.PizzaException;
  */
 
 public class PizzaFactory {
-
 
 	/**
 	 * A method that uses the Factory Method pattern to produce an instance of one of the asgn2Pizzas.Pizza subclasses. 
@@ -30,6 +34,26 @@ public class PizzaFactory {
 	 * */
 	public static Pizza getPizza(String pizzaCode, int quantity, LocalTime orderTime, LocalTime deliveryTime) throws PizzaException{
 		// TO DO
+
+		Pizza order;
+		
+		if (pizzaCode.equals("PZM")){
+			order = new MargheritaPizza(quantity, orderTime, deliveryTime);
+			return order;
+		}
+		else if (pizzaCode.equals("PZV")){
+			order = new VegetarianPizza(quantity, orderTime, deliveryTime);
+			return order;
+
+		}
+		else if (pizzaCode.equals("PZL")){
+			order = new MeatLoversPizza(quantity, orderTime, deliveryTime);
+			return order;
+
+		}
+		else {		
+	        throw new PizzaException("Invalid CustomerCode" + pizzaCode);
+        }		
 	}
 
 }
