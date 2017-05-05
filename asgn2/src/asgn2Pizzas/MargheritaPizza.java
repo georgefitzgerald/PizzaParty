@@ -44,7 +44,7 @@ public class MargheritaPizza extends Pizza {
 		this.orderTime = orderTime;
 		this.deliveryTime = deliveryTime;
 		
-		if(this.quantity > maxQuan){
+		if(this.quantity > maxQuan || this.quantity < minQuan){
 			throw new PizzaException("Order is out of bounds."); 
 			
 		}
