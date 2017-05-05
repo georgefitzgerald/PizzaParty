@@ -62,7 +62,7 @@ public abstract class Pizza  {
 		this.price = price;
 		
 		
-		if(this.quantity > maxQuan){
+		iif(this.quantity > maxQuan || this.quantity < minQuan){
 			throw new PizzaException("Order is out of bounds."); 
 			
 		}
