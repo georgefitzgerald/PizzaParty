@@ -78,8 +78,33 @@ public class LogHandler {
 	 * 
 	 */
 	public static ArrayList<Pizza> populatePizzaDataset(String filename) throws PizzaException, LogHandlerException{
-		return null;
 		// TO DO
+		ArrayList<Pizza> pizzaArr = new ArrayList<Pizza>();
+		
+		BufferedReader br = null;
+			try {
+				br = new BufferedReader(new FileReader(filename));
+			} catch (FileNotFoundException e) {
+		    System.out.println("LogHandler: Error opening file");
+			}
+		boolean end = false;
+			do {
+				String line = null;
+				try {
+					line = br.readLine();
+				} catch (IOException e) {
+					System.out.println(e.getMessage());
+					e.printStackTrace();
+
+				}
+				if (line == null){ end = true;}
+				else {
+					pizzaArr.add(createPizza(line));
+				}
+
+		} while (!end);
+		
+		return pizzaArr;
 	}		
 
 	
@@ -110,8 +135,10 @@ public class LogHandler {
 	 * @throws LogHandlerException - If there was a problem parsing the line from the log file.
 	 */
 	public static Pizza createPizza(String line) throws PizzaException, LogHandlerException{
-		return null;
-		// TO DO		
+		// TO DO
+		String[] lineArr = line.split(COMMA);
+		
+		return PizzaFactory.getPizza(lineArr[7], Integer.parseInt(lineArr[8]), LocalTime.parse(lineArr[0]), LocalTime.parse(lineArr[1]));
 	}
 
 }
