@@ -56,10 +56,24 @@ public class PizzaRestaurant {
      *
 	 */
 	public boolean processLog(String filename) throws CustomerException, PizzaException, LogHandlerException{
-		customers = LogHandler.populateCustomerDataset(filename);
+		//customers = LogHandler.populateCustomerDataset(filename);
 		//pizzas = LogHandler.populatePizzaDataset(filename);
-				
-		return true; //if processed correctly => no exception thrown? 
+		BufferedReader br = null;
+		try {
+			customers = LogHandler.populateCustomerDataset(filename);
+			pizzas = LogHandler.populatePizzaDataset(filename);
+		} catch (PizzaException|CustomerException e) {
+            System.out.println("LogHandler: Error opening file");
+		}
+		
+		//replacing loghandlerExceptioN?
+		try {
+			br = new BufferedReader(new FileReader(filename));
+		} catch (FileNotFoundException e) {
+            System.out.println("LogHandler: Error opening file");
+		}
+		
+		return true; //if processed correctly => no exception thrown? Leo: it's true if processed correctly, other wise exception thrown.
 	}
 
 	/**
