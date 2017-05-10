@@ -245,16 +245,25 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 					
 					if (returnVal == JFileChooser.APPROVE_OPTION) {
 			            File file = fc.getSelectedFile();
-						//restaurant.processLog(file.getPath());
+						
+			            try {
+							restaurant.processLog(file.getPath());
+						} catch (CustomerException | PizzaException | LogHandlerException e2) {
+							// TODO Auto-generated catch block
+						}
 			            
 			            //Temporary way of loading from log file
-			            try {
+/*			            try {
 							customerArr = LogHandler.populateCustomerDataset(file.getPath());
 						} catch (LogHandlerException | CustomerException e1) {
 							// TODO Auto-generated catch block	
-						}
+						}*/
 			            //Display Each Customer as line of text
-			            DisplayText();   
+/*			            try {
+							DisplayText();
+						} catch (CustomerException e1) {
+							// TODO Auto-generated catch block
+						} */  
 					}
 				}
 				//Total Distance (need to implement restaurant correctly)
@@ -274,18 +283,18 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 	/*
 	 * Display Each Customer as line in text box
 	 */
-	private void DisplayText(){
+	private void DisplayText() throws CustomerException{
 		//areDisplay.setText(customerArr.get(0).toString());
 		
 		for (int i = 0; i < customerArr.size(); i++){
-			CDisplay.append("\n"+customerArr.get(i).getName());
+			CDisplay.append("\n"+restaurant.getCustomerByIndex(i).getName());
 //			CDisplay.append(", " + ConvertCustCode(customerArr.get(i).getCustomerType()));
-			CDisplay.append(", " + customerArr.get(i).getCustomerType());
+			CDisplay.append(", " + restaurant.getCustomerByIndex(i).getCustomerType());
 
-			CDisplay.append(", " + customerArr.get(i).getMobileNumber());
-			CDisplay.append(", Dist:" + customerArr.get(i).getDeliveryDistance());
-			CDisplay.append(", X:" + customerArr.get(i).getLocationX());
-			CDisplay.append(", Y:" + customerArr.get(i).getLocationY());
+			CDisplay.append(", " + restaurant.getCustomerByIndex(i).getMobileNumber());
+			CDisplay.append(", Dist:" + restaurant.getCustomerByIndex(i).getDeliveryDistance());
+			CDisplay.append(", X:" + restaurant.getCustomerByIndex(i).getLocationX());
+			CDisplay.append(", Y:" + restaurant.getCustomerByIndex(i).getLocationY());
 		}
 
 	}

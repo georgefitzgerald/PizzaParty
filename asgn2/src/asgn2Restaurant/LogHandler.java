@@ -5,6 +5,7 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.time.LocalTime;
 import java.util.ArrayList;
 
 import asgn2Customers.Customer;
@@ -12,6 +13,7 @@ import asgn2Exceptions.CustomerException;
 import asgn2Exceptions.LogHandlerException;
 import asgn2Exceptions.PizzaException;
 import asgn2Pizzas.Pizza;
+import asgn2Pizzas.PizzaFactory;
 import asgn2Customers.CustomerFactory;
 
 /**
@@ -44,7 +46,6 @@ public class LogHandler {
 		try {
 			br = new BufferedReader(new FileReader(filename));
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
             System.out.println("LogHandler: Error opening file");
 		}
 		//read each line getting customer information and store in array list
