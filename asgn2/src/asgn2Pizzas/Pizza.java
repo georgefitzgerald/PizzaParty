@@ -20,15 +20,16 @@ import asgn2Pizzas.PizzaTopping;
  */
 public abstract class Pizza  {
 	
-	private int quantity;
-	private LocalTime orderTime;
-	private LocalTime deliveryTime;
-	private String type;
-	private double price;
-	private double margherita;
-	private double vegetarian;
-	private double meatLovers;
+	protected int quantity;
+	protected LocalTime orderTime;
+	protected LocalTime deliveryTime;
+	protected static String type;
+	protected static double price;
+	protected static double margherita;
+	protected double vegetarian;
+	protected double meatLovers;
 	final int maxQuan = 10;
+	final int minQuan = 1;
 	final int minOrderTime = 18;
 	final int maxOrderTime = 22;
 	final int minutes = 0;
@@ -62,7 +63,7 @@ public abstract class Pizza  {
 		this.price = price;
 		
 		
-		iif(this.quantity > maxQuan || this.quantity < minQuan){
+		if(this.quantity > maxQuan || this.quantity < minQuan){
 			throw new PizzaException("Order is out of bounds."); 
 			
 		}
