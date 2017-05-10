@@ -68,6 +68,7 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 	public PizzaGUI(String title) {
 		super(title);
 		createGUI();
+		restaurant = new PizzaRestaurant();
 	}
 
 	
@@ -245,7 +246,7 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 					
 					if (returnVal == JFileChooser.APPROVE_OPTION) {
 			            File file = fc.getSelectedFile();
-						
+
 			            try {
 							restaurant.processLog(file.getPath());
 						} catch (CustomerException | PizzaException | LogHandlerException e2) {
@@ -259,11 +260,11 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 							// TODO Auto-generated catch block	
 						}*/
 			            //Display Each Customer as line of text
-/*			            try {
+			            try {
 							DisplayText();
 						} catch (CustomerException e1) {
 							// TODO Auto-generated catch block
-						} */  
+						}   
 					}
 				}
 				//Total Distance (need to implement restaurant correctly)
@@ -288,9 +289,7 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 		
 		for (int i = 0; i < customerArr.size(); i++){
 			CDisplay.append("\n"+restaurant.getCustomerByIndex(i).getName());
-//			CDisplay.append(", " + ConvertCustCode(customerArr.get(i).getCustomerType()));
 			CDisplay.append(", " + restaurant.getCustomerByIndex(i).getCustomerType());
-
 			CDisplay.append(", " + restaurant.getCustomerByIndex(i).getMobileNumber());
 			CDisplay.append(", Dist:" + restaurant.getCustomerByIndex(i).getDeliveryDistance());
 			CDisplay.append(", X:" + restaurant.getCustomerByIndex(i).getLocationX());
