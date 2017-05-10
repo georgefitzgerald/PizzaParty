@@ -143,8 +143,12 @@ public class PizzaRestaurant {
 	 * @return the total profit for all of the Pizza objects in the pizzas field.
 	 */	
 	public double getTotalProfit(){
-		return 0;
 		// TO DO
+		int profit = 0;
+		for(int i = 0; i < pizzas.size(); i++){
+			profit+=pizzas.get(i).getOrderProfit();
+		}
+		return profit;
 	}
 	
 	/**
