@@ -16,10 +16,6 @@ import asgn2Exceptions.PizzaException;
  *
  */
 public class MargheritaPizza extends Pizza {
-	private int quantity;
-	private LocalTime orderTime;
-	private LocalTime deliveryTime;
-
 	
 	/**
 	 * 
@@ -40,24 +36,10 @@ public class MargheritaPizza extends Pizza {
 	public MargheritaPizza(int quantity, LocalTime orderTime, LocalTime deliveryTime) throws PizzaException {
 		// TO DO
 		super(quantity, orderTime, deliveryTime, type, price);
-		this.quantity = quantity;
-		this.orderTime = LocalTime.of(21, 17, 00, 00);
-		this.deliveryTime = deliveryTime;
 		
 		//System.out.println("Min order time" + minOrderTime);
 		//System.out.println("ordertime Hour" + this.orderTime.getHour());
 
-		
-		if(this.quantity > maxQuan || this.quantity < minQuan){
-			throw new PizzaException("Order is out of bounds."); 
-			
-		}
-		else if(this.orderTime.getHour() < minOrderTime){
-			throw new PizzaException("Minimum Time out of bounds.");
-		}
-		else if(this.orderTime.getHour() >= maxOrderTime && this.orderTime.getMinute() != minutes){
-			throw new PizzaException("maximum Time order out of bounds.");
-		}
 	}
 
 }
