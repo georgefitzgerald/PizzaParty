@@ -41,8 +41,12 @@ public class MargheritaPizza extends Pizza {
 		// TO DO
 		super(quantity, orderTime, deliveryTime, type, price);
 		this.quantity = quantity;
-		this.orderTime = orderTime;
+		this.orderTime = LocalTime.of(21, 17, 00, 00);
 		this.deliveryTime = deliveryTime;
+		
+		//System.out.println("Min order time" + minOrderTime);
+		//System.out.println("ordertime Hour" + this.orderTime.getHour());
+
 		
 		if(this.quantity > maxQuan || this.quantity < minQuan){
 			throw new PizzaException("Order is out of bounds."); 

@@ -59,12 +59,12 @@ public class PizzaRestaurant {
      *
 	 */
 	public boolean processLog(String filename) throws CustomerException, PizzaException, LogHandlerException{
-		customers = LogHandler.populateCustomerDataset(filename);
+//		customers = LogHandler.populateCustomerDataset(filename);
 		//pizzas = LogHandler.populatePizzaDataset(filename);
-		/*BufferedReader br = null;
+		BufferedReader br = null;
 		try {
 			customers = LogHandler.populateCustomerDataset(filename);
-			//pizzas = LogHandler.populatePizzaDataset(filename);
+			pizzas = LogHandler.populatePizzaDataset(filename);
 		} catch (CustomerException e) {
             System.out.println("LogHandler: Error opening file");
 		}
@@ -74,7 +74,7 @@ public class PizzaRestaurant {
 			br = new BufferedReader(new FileReader(filename));
 		} catch (FileNotFoundException e) {
             System.out.println("LogHandler: Error opening file");
-		}*/
+		}
 		
 		return true; // Leo: it's true if processed correctly, other wise exception thrown.
 	}
@@ -158,7 +158,8 @@ public class PizzaRestaurant {
 	 * <P> POST:  The pizzas and customers fields are set to their initial empty states
 	 */
 	public void resetDetails(){
-		// TO DO
+		customers.removeAll(customers);
+		pizzas.removeAll(pizzas);
 	}
 
 }

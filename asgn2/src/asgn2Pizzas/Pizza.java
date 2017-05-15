@@ -21,7 +21,7 @@ import asgn2Pizzas.PizzaTopping;
 public abstract class Pizza  {
 	
 	protected int quantity;
-	protected LocalTime orderTime;
+	public LocalTime orderTime;
 	protected LocalTime deliveryTime;
 	protected static String type;
 	protected static double price;
@@ -55,20 +55,25 @@ public abstract class Pizza  {
 	 * 
 	 */
 	public Pizza(int quantity, LocalTime orderTime, LocalTime deliveryTime, String type, double price) throws PizzaException{
-		// TO DO
+		// TO DO, 
 		this.quantity = quantity;
-		this.orderTime = orderTime;
+		this.orderTime = LocalTime.of(21, 17, 00, 00);
 		this.deliveryTime = deliveryTime;
 		this.type = type;
 		this.price = price;
-		
+		//System.out.println("Min order time" + minOrderTime);
+		//System.out.println("ordertime Hour" + this.orderTime.getHour());
+		if (this.orderTime.equals(null)){
+			System.out.println("ordertime Hour null");
+
+		}
 		
 		if(this.quantity > maxQuan || this.quantity < minQuan){
 			throw new PizzaException("Order is out of bounds."); 
 			
 		}
 		else if(this.orderTime.getHour() < minOrderTime){
-			throw new PizzaException("Minimum Time out of bounds.");
+				throw new PizzaException("Minimum Time out of bounds.");
 		}
 		else if(this.orderTime.getHour() >= maxOrderTime && this.orderTime.getMinute() != minutes){
 			throw new PizzaException("maximum Time order out of bounds.");
