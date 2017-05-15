@@ -14,9 +14,6 @@ import asgn2Exceptions.PizzaException;
  *
  */
 public class MeatLoversPizza extends Pizza {
-	private int quantity;
-	private LocalTime orderTime;
-	private LocalTime deliveryTime;
 
 	/**
 	 * 
@@ -37,20 +34,7 @@ public class MeatLoversPizza extends Pizza {
 	public MeatLoversPizza(int quantity, LocalTime orderTime, LocalTime deliveryTime) throws PizzaException {
 		// TO DO
 		super(quantity, orderTime, deliveryTime, type, price);
-		this.quantity = quantity;
-		this.orderTime = orderTime;
-		this.deliveryTime = deliveryTime;
 		
-		if(this.quantity > maxQuan || this.quantity < minQuan){
-			throw new PizzaException("Order is out of bounds."); 
-			
-		}
-		else if(this.orderTime.getHour() < minOrderTime){
-			throw new PizzaException("Minimum Time out of bounds.");
-		}
-		else if(this.orderTime.getHour() >= maxOrderTime && this.orderTime.getMinute() != minutes){
-			throw new PizzaException("maximum Time order out of bounds.");
-		}
 	}
 
 }
