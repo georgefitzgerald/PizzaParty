@@ -57,9 +57,6 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 	
 	//temp variable for loading using loghandler instead of pizza restuarant
     private ArrayList<Customer> customerArr = new ArrayList<Customer>();
-
-
-
 	
 	/**
 	 * Creates a new Pizza GUI with the specified title 
@@ -226,6 +223,7 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 		tempDisplay.setLineWrap(true);
 		//tempDisplay.
 		tempDisplay.setFont(new Font("Arial",Font.BOLD,12));
+		tempDisplay.setSelectedTextColor(Color.YELLOW);
 		tempDisplay.setBorder(BorderFactory.createEtchedBorder());
 		tempDisplay.setBackground(Color.BLACK);
 		Dimension textDim = new Dimension();
@@ -240,6 +238,7 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 				Object src = e.getSource();
 				//Consider the alternatives - not all active at once.
 				if (src==btnLoad) {
+					resetEverything();
 					JFileChooser fc = new JFileChooser();
 					
 					int returnVal = fc.showOpenDialog(this);
@@ -250,52 +249,69 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 			            try {
 							restaurant.processLog(file.getPath());
 						} catch (CustomerException | PizzaException | LogHandlerException e2) {
-							// TODO Auto-generated catch block
+							System.out.println("Exception thrown by process log");
+							JOptionPane.showMessageDialog(null,"ALERT MESSAGE","Error loading file",JOptionPane.WARNING_MESSAGE);
 						}
-			            
-			            //Temporary way of loading from log file
-/*			            try {
-							customerArr = LogHandler.populateCustomerDataset(file.getPath());
-						} catch (LogHandlerException | CustomerException e1) {
-							// TODO Auto-generated catch block	
-						}*/
+
 			            //Display Each Customer as line of text
 			            try {
 							DisplayText();
-						} catch (CustomerException e1) {
-							// TODO Auto-generated catch block
+						} catch (CustomerException | PizzaException e1) {
+							System.out.println("Exception thrown by display");
+							JOptionPane.showMessageDialog(null,"ALERT MESSAGE","Error displaying file",JOptionPane.WARNING_MESSAGE);
+
 						}   
 					}
+					JOptionPane.showMessageDialog(null, "Loaded Database");
+
 				}
 				//Total Distance (need to implement restaurant correctly)
 				if (src==btnTotals) {
-					//restaurant.getTotalDeliveryDistance()
-					labDist.setText("Total Distance: 100" )	;
-					//"Wiring Class: Warning",JOptionPane.WARNING_MESSAGE); 
+					double totalDist = restaurant.getTotalDeliveryDistance();
+					totalDist = Math.round(totalDist*100)/100;
+					labDist.setText("Total Distance: " + totalDist)	;
+					//if profit is integer print no decimals else print two
+					labProf.setText("Total Profit: " +restaurant.getTotalProfit())	;
+					JOptionPane.showMessageDialog(null, "Displayed Totals");
 
 				}
 				if (src==btnReset){
-					//clear the pizza restuarant
-					//remove totals and profit
-					//clear file buffer too maybe? 
+					resetEverything();
 				}
 	}
 	
 	/*
 	 * Display Each Customer as line in text box
 	 */
-	private void DisplayText() throws CustomerException{
+	private void DisplayText() throws CustomerException, PizzaException{
 		//areDisplay.setText(customerArr.get(0).toString());
 		
-		for (int i = 0; i < customerArr.size(); i++){
+		for (int i = 0; i < restaurant.getNumCustomerOrders(); i++){
 			CDisplay.append("\n"+restaurant.getCustomerByIndex(i).getName());
-			CDisplay.append(", " + restaurant.getCustomerByIndex(i).getCustomerType());
-			CDisplay.append(", " + restaurant.getCustomerByIndex(i).getMobileNumber());
+			CDisplay.append(", Type:" + restaurant.getCustomerByIndex(i).getCustomerType());
+			CDisplay.append(", Num:" + restaurant.getCustomerByIndex(i).getMobileNumber());
 			CDisplay.append(", Dist:" + restaurant.getCustomerByIndex(i).getDeliveryDistance());
 			CDisplay.append(", X:" + restaurant.getCustomerByIndex(i).getLocationX());
 			CDisplay.append(", Y:" + restaurant.getCustomerByIndex(i).getLocationY());
 		}
-
+		for (int i = 0; i < restaurant.getNumPizzaOrders(); i++){
+			PDisplay.append("\n"+restaurant.getPizzaByIndex(i).getPizzaType());
+			PDisplay.append(", Quantity:" + restaurant.getPizzaByIndex(i).getQuantity());
+			PDisplay.append(", Price:" + restaurant.getPizzaByIndex(i).getOrderPrice());
+			PDisplay.append(", Cost:" + restaurant.getPizzaByIndex(i).getOrderCost());
+			PDisplay.append(", Profit:" + restaurant.getPizzaByIndex(i).getOrderProfit());
+		}
+	}
+	
+	private void resetEverything(){
+		//clear the pizza restuarant display and data
+		CDisplay.setText("");
+		PDisplay.setText("");
+		restaurant.resetDetails();
+		//remove totals and profit
+		labDist.setText("Total Distance: ");
+		labProf.setText("Total Profit: ");
+		JOptionPane.showMessageDialog(null, "Reset");
 	}
 	
 	private String ConvertCustCode(String code){
