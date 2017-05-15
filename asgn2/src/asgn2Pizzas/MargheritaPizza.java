@@ -16,6 +16,7 @@ import asgn2Exceptions.PizzaException;
  *
  */
 public class MargheritaPizza extends Pizza {
+
 	
 	/**
 	 * 
@@ -36,10 +37,11 @@ public class MargheritaPizza extends Pizza {
 	public MargheritaPizza(int quantity, LocalTime orderTime, LocalTime deliveryTime) throws PizzaException {
 		// TO DO
 		super(quantity, orderTime, deliveryTime, type, price);
-		
-		//System.out.println("Min order time" + minOrderTime);
-		//System.out.println("ordertime Hour" + this.orderTime.getHour());
-
+		type = "MargheritaPizza";
+		price = 8;
+		top.add(PizzaTopping.TOMATO);
+		top.add(PizzaTopping.CHEESE);
 	}
+	
 
 }
