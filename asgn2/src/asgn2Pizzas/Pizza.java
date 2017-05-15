@@ -21,22 +21,22 @@ import asgn2Pizzas.PizzaTopping;
 public abstract class Pizza  {
 	
 	protected int quantity;
-	public LocalTime orderTime;
-	protected LocalTime deliveryTime;
-	protected static String type;
-	protected static double price;
-	protected static double margherita;
-	protected double vegetarian;
-	protected double meatLovers;
 	final int maxQuan = 10;
 	final int minQuan = 1;
-	final int minOrderTime = 18;
-	final int maxOrderTime = 22;
-	final int minutes = 0;
 	
-	 
+	protected LocalTime orderTime;
+	protected LocalTime deliveryTime;
+	final LocalTime minOrderTime = LocalTime.of(19, 00, 00);
+	final LocalTime maxOrderTime = LocalTime.of(23, 00, 00);
 	
+	protected static String type;
 	
+	protected double totalCostPerPizza;
+	protected double cost;
+	protected static double price;
+	
+	protected List<PizzaTopping> top;
+			
 	/**
 	 *  This class represents a pizza produced at the Pizza Palace restaurant.  A detailed description of the class's fields
 	 *  and parameters is provided in the Assignment Specification, in particular in Section 5.1. 
@@ -55,29 +55,23 @@ public abstract class Pizza  {
 	 * 
 	 */
 	public Pizza(int quantity, LocalTime orderTime, LocalTime deliveryTime, String type, double price) throws PizzaException{
-		// TO DO, 
+		// TO DO
 		this.quantity = quantity;
-		this.orderTime = LocalTime.of(21, 17, 00, 00);
+		this.orderTime = orderTime;
 		this.deliveryTime = deliveryTime;
 		this.type = type;
 		this.price = price;
-		//System.out.println("Min order time" + minOrderTime);
-		//System.out.println("ordertime Hour" + this.orderTime.getHour());
-		if (this.orderTime.equals(null)){
-			System.out.println("ordertime Hour null");
-
-		}
 		
 		if(this.quantity > maxQuan || this.quantity < minQuan){
 			throw new PizzaException("Order is out of bounds."); 
-			
 		}
-		else if(this.orderTime.getHour() < minOrderTime){
-				throw new PizzaException("Minimum Time out of bounds.");
+		else if(this.orderTime.isBefore(minOrderTime)){
+			throw new PizzaException("Minimum Time out of bounds.");
 		}
-		else if(this.orderTime.getHour() >= maxOrderTime && this.orderTime.getMinute() != minutes){
+		else if(this.orderTime.isAfter(maxOrderTime)){
 			throw new PizzaException("maximum Time order out of bounds.");
 		}
+		top = new ArrayList<PizzaTopping>();
 	}
 
 	/**
@@ -88,11 +82,9 @@ public abstract class Pizza  {
 	 */
 	public final void calculateCostPerPizza(){
 		// TO DO
-		this.margherita = PizzaTopping.CHEESE.getCost() + PizzaTopping.TOMATO.getCost();
-		this.vegetarian = PizzaTopping.CHEESE.getCost() + PizzaTopping.TOMATO.getCost() 
-		+ PizzaTopping.EGGPLANT.getCost() + PizzaTopping.MUSHROOM.getCost()+PizzaTopping.CAPSICUM.getCost();
-		this.meatLovers = PizzaTopping.TOMATO.getCost()+PizzaTopping.CHEESE.getCost()
-		+PizzaTopping.BACON.getCost()+PizzaTopping.PEPPERONI.getCost()+PizzaTopping.SALAMI.getCost();
+		for(int i=0;i<top.size();i++){
+			this.totalCostPerPizza += top.get(i).getCost();
+		}
 				
 	}
 	
@@ -102,15 +94,7 @@ public abstract class Pizza  {
 	 */
 	public final double getCostPerPizza(){
 		// TO DO
-		if(this.getPizzaType() == "Margherita"){
-			return margherita;
-		}
-		else if(this.getPizzaType() == "Vegetarian"){
-			return vegetarian;
-		}
-		else{
-			return meatLovers;
-		}
+		return totalCostPerPizza/quantity;
 		
 	}
 
@@ -120,7 +104,7 @@ public abstract class Pizza  {
 	 */
 	public final double getPricePerPizza(){
 		// TO DO
-		return price;
+		return price/quantity;
 	}
 
 	/**
@@ -129,15 +113,7 @@ public abstract class Pizza  {
 	 */
 	public final double getOrderCost(){
 		// TO DO
-		if(this.getPizzaType() == "Margherita"){
-			return margherita*quantity;
-		}
-		else if(this.getPizzaType() == "Vegetarian"){
-			return vegetarian*quantity;
-		}
-		else{
-			return meatLovers*quantity;
-		}
+		return totalCostPerPizza;
 		
 	}
 	
@@ -169,22 +145,8 @@ public abstract class Pizza  {
 	 */
 	public final boolean containsTopping(PizzaTopping topping){
 		// TO DO
-		if(this.getPizzaType() == "Margherita"){
-			if(topping == PizzaTopping.CHEESE || topping == PizzaTopping.TOMATO){
-				return true;
-			}
-		}
-		else if(this.getPizzaType() == "Vegetarian"){
-			if(topping == PizzaTopping.CHEESE || topping == PizzaTopping.TOMATO || topping == PizzaTopping.EGGPLANT 
-					|| topping == PizzaTopping.MUSHROOM || topping == PizzaTopping.CAPSICUM){
-				return true;
-			}
-		}
-		else{
-			if(topping == PizzaTopping.CHEESE || topping == PizzaTopping.TOMATO || topping == PizzaTopping.BACON 
-					|| topping == PizzaTopping.PEPPERONI || topping == PizzaTopping.SALAMI){
-				return true;
-			}
+		if(top.contains(topping)){
+			return true;
 		}
 		return false;
 	}
