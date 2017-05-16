@@ -56,6 +56,14 @@ public abstract class Customer {
 
 		}
 		else {throw new CustomerException();}
+		
+		//Leo: It doesn't throw the exception unless any tests unless I do this to test constraints.
+		if(name.length() <= 0 || name.length() > 21){
+			throw new CustomerException("Letter out of bounds");
+		}
+		else if (mobileNumber.length() != 10 || !mobileNumber.startsWith("0")){
+			throw new CustomerException("Nuber out of bounds");
+		}
 
 	}
 	
