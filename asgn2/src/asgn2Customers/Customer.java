@@ -40,8 +40,10 @@ public abstract class Customer {
 		LocationX = locationX;
 		LocationY = locationY;
 		CustomerType = type;
-		
+		Name = name;
+		MobileNumber = mobileNumber;
 		//between 1 and 20 characters not just white spaces
+		/*
 		if (name.length() > 0 && name.length() < 21){
 			if (name.trim() != null){
 				Name = name;
@@ -56,6 +58,7 @@ public abstract class Customer {
 
 		}
 		else {throw new CustomerException();}
+		*/
 		
 		//Leo: It doesn't throw the exception unless any tests unless I do this to test constraints.
 		if(name.length() <= 0 || name.length() > 21){
