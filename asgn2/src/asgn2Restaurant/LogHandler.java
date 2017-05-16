@@ -7,6 +7,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.regex.PatternSyntaxException;
 
 import asgn2Customers.Customer;
 import asgn2Exceptions.CustomerException;
@@ -46,7 +47,7 @@ public class LogHandler {
 		try {
 			br = new BufferedReader(new FileReader(filename));
 		} catch (FileNotFoundException e) {
-            System.out.println("LogHandler: Error opening file");
+			throw new LogHandlerException();
 		}
 		//read each line getting customer information and store in array list
     	boolean end = false;
@@ -86,7 +87,7 @@ public class LogHandler {
 			try {
 				br = new BufferedReader(new FileReader(filename));
 			} catch (FileNotFoundException e) {
-		    System.out.println("LogHandler: Error opening file");
+				throw new LogHandlerException();
 			}
 		boolean end = false;
 			do {
@@ -121,9 +122,14 @@ public class LogHandler {
 		// TO DO
 		//create string array for each field of line
    	    //otime, dtime, name, number, code, x, y
-   	    String[] lineArr = line.split(COMMA);
+		String[] lineArr;
+		try{
+			lineArr = line.split(COMMA);
+		} catch (PatternSyntaxException e) {throw new LogHandlerException();}
 		//System.out.println("LogHandler: Mobile Number " + lineArr[2]);
-		return CustomerFactory.getCustomer(lineArr[4].trim(), lineArr[2], lineArr[3], Integer.parseInt(lineArr[5]), Integer.parseInt(lineArr[6]));
+		try{
+			return CustomerFactory.getCustomer(lineArr[4].trim(), lineArr[2], lineArr[3], Integer.parseInt(lineArr[5]), Integer.parseInt(lineArr[6]));
+		} catch (ArrayIndexOutOfBoundsException e){throw new LogHandlerException();}
 	}
 
 
@@ -137,9 +143,13 @@ public class LogHandler {
 	 */
 	public static Pizza createPizza(String line) throws PizzaException, LogHandlerException{
 		// TO DO
-		String[] lineArr = line.split(COMMA);
-		
-		return PizzaFactory.getPizza(lineArr[7], Integer.parseInt(lineArr[8]), LocalTime.parse(lineArr[0]), LocalTime.parse(lineArr[1]));
+		String[] lineArr;
+		try{
+			lineArr = line.split(COMMA);
+		} catch (PatternSyntaxException e) {throw new LogHandlerException();}
+		try{
+			return PizzaFactory.getPizza(lineArr[7], Integer.parseInt(lineArr[8]), LocalTime.parse(lineArr[0]), LocalTime.parse(lineArr[1]));
+		} catch (ArrayIndexOutOfBoundsException e){throw new LogHandlerException();}
 	}
 
 }
