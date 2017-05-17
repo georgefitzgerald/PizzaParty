@@ -154,7 +154,7 @@ public class PizzaTests {
 		public void VegetarianCost() throws PizzaException{
 			VegetarianPizza marg = new VegetarianPizza(1, otime, dtime);
 			marg.calculateCostPerPizza();
-			assertEquals(marg.getCostPerPizza(), 5, 0);
+			assertEquals(marg.getCostPerPizza(), 5.5, 0);
 		}
 	
 	//Gets correct price charged to customer for each pizza
@@ -378,7 +378,7 @@ public class PizzaTests {
 		@Test //MeatLover has correct type
 		public void CheckMeatLoverType() throws PizzaException{
 			MeatLoversPizza marg = new MeatLoversPizza(1, otime, dtime);
-			assertEquals("MeatLovers", marg.getPizzaType());
+			assertEquals("Meat Lovers", marg.getPizzaType());
 		}
 		
 		@Test //Vegetarian has correct type
