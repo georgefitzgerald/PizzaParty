@@ -295,7 +295,7 @@ public class PizzaTests {
 		@Test //check order Profit for 1 margherita is correct
 		public void MargheritaOrderProfit1() throws PizzaException{
 			MargheritaPizza marg = new MargheritaPizza(1, otime, dtime);
-			assertEquals(marg.getOrderProfit(), 1.5, 0);
+			assertEquals(marg.getOrderProfit(), 8, 0);
 		}
 		
 		@Test //check order Profit for 2 margherita is correct
