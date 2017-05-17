@@ -295,19 +295,19 @@ public class PizzaTests {
 		@Test //check order Profit for 1 margherita is correct
 		public void MargheritaOrderProfit1() throws PizzaException{
 			MargheritaPizza marg = new MargheritaPizza(1, otime, dtime);
-			assertEquals(marg.getOrderProfit(), 8, 0);
+			assertEquals(marg.getOrderProfit(), 6.5, 0);
 		}
 		
 		@Test //check order Profit for 2 margherita is correct
 		public void MargheritaOrderProfit2() throws PizzaException{
 			MargheritaPizza marg = new MargheritaPizza(2, otime, dtime);
-			assertEquals(marg.getOrderProfit(), 5, 0);
+			assertEquals(marg.getOrderProfit(), 13, 0);
 		}
 		
 		@Test //check order Profit for 10 margherita is correct
 		public void MargheritaOrderProfit10() throws PizzaException{
 			MargheritaPizza marg = new MargheritaPizza(10, otime, dtime);
-			assertEquals(marg.getOrderProfit(), 6, 0);
+			assertEquals(marg.getOrderProfit(), 65, 0);
 		}
 		
 	//Contains Topping - check if it does or doesn't contain
