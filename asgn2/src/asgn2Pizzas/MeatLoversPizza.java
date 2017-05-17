@@ -33,9 +33,7 @@ public class MeatLoversPizza extends Pizza {
 	 */
 	public MeatLoversPizza(int quantity, LocalTime orderTime, LocalTime deliveryTime) throws PizzaException {
 		// TO DO
-		super(quantity, orderTime, deliveryTime, type, price);
-		type = "Meat Lovers";
-		price = 12;
+		super(quantity, orderTime, deliveryTime, "Meat Lovers", 12);
 		
 		top.add(PizzaTopping.TOMATO);
 		top.add(PizzaTopping.CHEESE);
