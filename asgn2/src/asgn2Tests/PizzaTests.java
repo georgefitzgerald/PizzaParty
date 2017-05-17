@@ -92,45 +92,45 @@ public class PizzaTests {
 			otime = LocalTime.of(17, 59, 59, 0);
 			MargheritaPizza marg = new MargheritaPizza(1, otime, dtime);
 		}
-		//Don't throw exception if ordertime is 18
+		//Don't throw exception if ordertime is 19
 		@Test 
 		public void MargheritaExceptionOrdertime18() throws PizzaException{
-			otime = LocalTime.of(18, 00, 0, 0);
+			otime = LocalTime.of(19, 00, 0, 0);
 			MargheritaPizza marg = new MargheritaPizza(1, otime, dtime);
 		}
 	
 		//Throws exception if ordertime greater than order time of 22
+		@Test (expected=PizzaException.class)
+		public void MargheritaExceptionOrdertime22() throws PizzaException{
+			otime = LocalTime.of(23, 00, 0, 0);
+			MargheritaPizza marg = new MargheritaPizza(1, otime, dtime);
+		}
+		
+		//Throws exception if ordertime is 23
 		@Test (expected=PizzaException.class)
 		public void MargheritaExceptionOrdertime23() throws PizzaException{
 			otime = LocalTime.of(23, 00, 0, 0);
 			MargheritaPizza marg = new MargheritaPizza(1, otime, dtime);
 		}
 		
-		//Throws exception if ordertime is 22
-		@Test (expected=PizzaException.class)
-		public void MargheritaExceptionOrdertime22() throws PizzaException{
-			otime = LocalTime.of(22, 00, 0, 0);
-			MargheritaPizza marg = new MargheritaPizza(1, otime, dtime);
-		}
-		
 		//Throws exception if ordertime greater than order time of 22 by minutes
 		@Test (expected=PizzaException.class)
-		public void MargheritaExceptionOrdertime2201() throws PizzaException{
-			otime = LocalTime.of(22, 01, 0, 0);
+		public void MargheritaExceptionOrdertime2301() throws PizzaException{
+			otime = LocalTime.of(23, 01, 0, 0);
 			MargheritaPizza marg = new MargheritaPizza(1, otime, dtime);
 		}
 	
 		//Throws exception if ordertime greater than order time of 22 by second
 		@Test (expected=PizzaException.class)
-		public void MargheritaExceptionOrdertime220001() throws PizzaException{
-			otime = LocalTime.of(22, 00, 01, 0);
+		public void MargheritaExceptionOrdertime230001() throws PizzaException{
+			otime = LocalTime.of(23, 00, 01, 0);
 			MargheritaPizza marg = new MargheritaPizza(1, otime, dtime);
 		}
 	
 		//Doesn't throw exception when order time is 11pm 
 		@Test 
-		public void MargheritaExceptionOrdertime215959() throws PizzaException{
-			otime = LocalTime.of(21, 59, 59, 0);
+		public void MargheritaExceptionOrdertime225959() throws PizzaException{
+			otime = LocalTime.of(22, 59, 59, 0);
 			MargheritaPizza marg = new MargheritaPizza(1, otime, dtime);
 		}
 		
@@ -140,22 +140,22 @@ public class PizzaTests {
 		public void MargheritaCost() throws PizzaException{
 			MargheritaPizza marg = new MargheritaPizza(1, otime, dtime);
 			marg.calculateCostPerPizza();
-			assertEquals(marg.getCostPerPizza(), 5, 0);
+			assertEquals(marg.getCostPerPizza(), 1.5, 0);
 		}
 		
-/*		@Test //check cost for meatlovers is correct
-		public void MargheritaCost() throws PizzaException{
-			MargheritaPizza marg = new MargheritaPizza(1, otime, dtime);
+		@Test //check cost for meatlovers is correct
+		public void MeatLoversCost() throws PizzaException{
+			MeatLoversPizza marg = new MeatLoversPizza(1, otime, dtime);
 			marg.calculateCostPerPizza();
-			assertEquals(marg.getCostPerPizza(), 5, 0);
+			assertEquals(marg.getCostPerPizza(), 5.5, 0);
 		}
 		
 		@Test //check cost for vege is correct
-		public void MargheritaCost() throws PizzaException{
-			MargheritaPizza marg = new MargheritaPizza(1, otime, dtime);
+		public void VegetarianCost() throws PizzaException{
+			VegetarianPizza marg = new VegetarianPizza(1, otime, dtime);
 			marg.calculateCostPerPizza();
 			assertEquals(marg.getCostPerPizza(), 5, 0);
-		}*/
+		}
 	
 	//Gets correct price charged to customer for each pizza
 		
@@ -236,7 +236,7 @@ public class PizzaTests {
 		
 	//Get order price commetted out until price is corrected
 		
-/*		@Test //check order price for 1 margherita is correct
+		@Test //check order price for 1 margherita is correct
 		public void MargheritaOrderPrice1() throws PizzaException{
 			MargheritaPizza marg = new MargheritaPizza(1, otime, dtime);
 			assertEquals(marg.getOrderPrice(), 8, 0);
@@ -288,11 +288,11 @@ public class PizzaTests {
 		public void VegetarianOrderPrice10() throws PizzaException{
 			VegetarianPizza marg = new VegetarianPizza(10, otime, dtime);
 			assertEquals(marg.getOrderPrice(), 100, 0);
-		}*/
+		}
 		
 	// Get Order Profit insert correct pricing when price works
 		
-/*		@Test //check order Profit for 1 margherita is correct
+		@Test //check order Profit for 1 margherita is correct
 		public void MargheritaOrderProfit1() throws PizzaException{
 			MargheritaPizza marg = new MargheritaPizza(1, otime, dtime);
 			assertEquals(marg.getOrderProfit(), 3, 0);
@@ -308,7 +308,7 @@ public class PizzaTests {
 		public void MargheritaOrderProfit10() throws PizzaException{
 			MargheritaPizza marg = new MargheritaPizza(10, otime, dtime);
 			assertEquals(marg.getOrderProfit(), 6, 0);
-		}*/
+		}
 		
 	//Contains Topping - check if it does or doesn't contain
 		
