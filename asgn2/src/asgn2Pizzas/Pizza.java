@@ -29,11 +29,11 @@ public abstract class Pizza  {
 	final LocalTime minOrderTime = LocalTime.of(19, 00, 00);
 	final LocalTime maxOrderTime = LocalTime.of(23, 00, 00);
 	
-	protected static String type;
+	protected String type;
 	
 	protected double totalCostPerPizza;
 	protected double cost;
-	protected static double price;
+	protected double price;
 	
 	protected List<PizzaTopping> top;
 			
@@ -82,10 +82,11 @@ public abstract class Pizza  {
 	 */
 	public final void calculateCostPerPizza(){
 		// TO DO
+		double result  = 0;
 		for(int i=0;i<top.size();i++){
-			this.totalCostPerPizza += top.get(i).getCost();
+			result += this.top.get(i).getCost();
 		}
-				
+		this.cost = result;		
 	}
 	
 	/**
