@@ -37,19 +37,12 @@ public class PizzaTests {
 	}
 	
 	//Initializes data structure on Pizza Abstract class
-	@Test
-	public void initDataStructure() {
-/*
-		String type = "PZM";
-		Pizza pizzat = new Pizza(1, ltime, ltime, type,34);
-		assertNotEquals(pizzat, null);*/
-	}
+
 	
 	//Create margherita
 		@Test
 		public void CreateMargherita() throws PizzaException{
 			MargheritaPizza marg = new MargheritaPizza(2, otime, dtime);
-			//assertNotEquals(marg, null);
 		}
 	
 	//Quantity Exceptions
