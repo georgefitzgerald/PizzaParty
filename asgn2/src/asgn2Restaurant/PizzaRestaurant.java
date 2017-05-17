@@ -61,20 +61,18 @@ public class PizzaRestaurant {
 	public boolean processLog(String filename) throws CustomerException, PizzaException, LogHandlerException{
 //		customers = LogHandler.populateCustomerDataset(filename);
 		//pizzas = LogHandler.populatePizzaDataset(filename);
-		BufferedReader br = null;
-		try {
+		//BufferedReader br = null;
+		
+		//this exception will be thrown by populatePizza/Customer
+//		try {
+//			br = new BufferedReader(new FileReader(filename));
+//		} catch (FileNotFoundException e) {
+//            throw new LogHandlerException();
+//		}
+		
 			customers = LogHandler.populateCustomerDataset(filename);
 			pizzas = LogHandler.populatePizzaDataset(filename);
-		} catch (CustomerException e) {
-            System.out.println("LogHandler: Error opening file");
-		}
-		
-		//replacing loghandlerExceptioN?
-		try {
-			br = new BufferedReader(new FileReader(filename));
-		} catch (FileNotFoundException e) {
-            System.out.println("LogHandler: Error opening file");
-		}
+
 		
 		return true; // Leo: it's true if processed correctly, other wise exception thrown.
 	}
