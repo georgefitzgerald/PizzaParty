@@ -42,7 +42,7 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 	public static final int WIDTH = 800;
 	public static final int HEIGHT = 600;
 	private PizzaRestaurant restaurant;
-	//Jfram elements
+	//Jframe elements
 	private JPanel pnlBtn;
 	private JPanel pnlTotals;
 	private JLabel labDist;
@@ -53,6 +53,9 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 	private JTextArea CDisplay;
 	private JTextArea PDisplay;
 	private JPanel pnlTable;
+	private JScrollPane scroll1;
+	private JScrollPane scroll2;
+
 
 	
 	//temp variable for loading using loghandler instead of pizza restuarant
@@ -97,8 +100,6 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 		
 		labDist = createLabel("Total Distance: ");
 		labProf = createLabel("Total Profit: ");
-
-		
 		
 		layoutButtonPanel();
 		createTextBoxLayout();
@@ -183,6 +184,16 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 		GridBagLayout layout = new GridBagLayout();
 		pnlTable.setLayout(layout);
 		//Lots of layout code here
+		//add scroll bar to both Jtext areas
+
+		scroll1 = new JScrollPane(CDisplay); //place the JTextArea in a scroll pane
+		scroll2 = new JScrollPane(PDisplay, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
+                JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+/*		JScrollBar bar = scroll1.getVerticalScrollBar();
+		bar.setPreferredSize(new Dimension(40, 0));*/
+
+		//panel.add(scroll, BorderLayout.CENTER);
+		
 		//add components to grid
 		GridBagConstraints constraints = new GridBagConstraints();
 		//Defaults
@@ -190,8 +201,9 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 		constraints.anchor = GridBagConstraints.CENTER;
 		constraints.weightx = 100;
 		constraints.weighty = 100;
-		addToPanel(pnlTable, CDisplay,constraints,0,0,1,1);
-		addToPanel(pnlTable, PDisplay,constraints,1,0,1,1);
+		constraints.fill = constraints.BOTH;
+		addToPanel(pnlTable, scroll1,constraints,0,0,1,3);
+		addToPanel(pnlTable, scroll2,constraints,1,0,1,2);
 	}
 
 	
@@ -260,9 +272,10 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 							System.out.println("Exception thrown by display");
 							JOptionPane.showMessageDialog(null,"ALERT MESSAGE","Error displaying file",JOptionPane.WARNING_MESSAGE);
 
-						}   
+						}  
+						JOptionPane.showMessageDialog(null, "Loaded Database");
+
 					}
-					JOptionPane.showMessageDialog(null, "Loaded Database");
 
 				}
 				//Total Distance (need to implement restaurant correctly)
@@ -277,6 +290,8 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 				}
 				if (src==btnReset){
 					resetEverything();
+					JOptionPane.showMessageDialog(null, "Reset");
+
 				}
 	}
 	
@@ -311,7 +326,6 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 		//remove totals and profit
 		labDist.setText("Total Distance: ");
 		labProf.setText("Total Profit: ");
-		JOptionPane.showMessageDialog(null, "Reset");
 	}
 	
 	private String ConvertCustCode(String code){
