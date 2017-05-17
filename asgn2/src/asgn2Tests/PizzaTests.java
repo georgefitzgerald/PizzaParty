@@ -147,7 +147,7 @@ public class PizzaTests {
 		public void MeatLoversCost() throws PizzaException{
 			MeatLoversPizza marg = new MeatLoversPizza(1, otime, dtime);
 			marg.calculateCostPerPizza();
-			assertEquals(marg.getCostPerPizza(), 5.5, 0);
+			assertEquals(marg.getCostPerPizza(), 5, 0);
 		}
 		
 		@Test //check cost for vege is correct
