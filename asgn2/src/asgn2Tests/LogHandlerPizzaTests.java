@@ -2,6 +2,8 @@ package asgn2Tests;
 
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
+
 import org.junit.Test;
 
 import asgn2Exceptions.LogHandlerException;
@@ -17,6 +19,7 @@ import asgn2Restaurant.LogHandler;
 public class LogHandlerPizzaTests {
 	
 			Pizza pizza;
+			
 	//Create Pizza correctly parses string to getpizza	
 		//throws exceptions when invalid parameters (functionality of pizzafactory.getPizza)
 		
@@ -102,10 +105,41 @@ public class LogHandlerPizzaTests {
 				pizza = LogHandler.createPizza(line);
 				assertEquals(pizza.getQuantity(), 9, 0);
 			}
-	//PopulateDataset - correctly reads a file into a pizza array
-		//throws loghandler exception when file doesn't exist. 
+			
+	//PopulateDataset - correctly reads a file into a pizza array 
 		//throws pizza exception when invalid parameters - quantity, times... 
-		//each line of file is parsed
+			//can we create our own log files to test with? 
+			//C:\Users\You\Documents\PizzaParty\asgn2\logs\20170102.txt
+		//throws loghandler exception when file doesn't exist. 
+			@Test (expected=LogHandlerException.class)
+			public void filedoesntExistException() throws PizzaException, LogHandlerException{
+				LogHandler.populatePizzaDataset("invalidFilePath");
+			}
+
 		//returns different arrays - for same file and different files
-		//
+			@Test //same file
+			public void SameFileDifferentInstances() throws PizzaException, LogHandlerException{
+				ArrayList<Pizza> pizzaArr1;
+				ArrayList<Pizza> pizzaArr2;
+				pizzaArr2 = LogHandler.populatePizzaDataset("C:\\Users\\You\\Documents\\PizzaParty\\asgn2\\logs\\20170102.txt");
+				pizzaArr1 = LogHandler.populatePizzaDataset("C:\\Users\\You\\Documents\\PizzaParty\\asgn2\\logs\\20170102.txt");
+				assertNotEquals(pizzaArr2.toString(), pizzaArr1.toString());
+			}
+			@Test //different file
+			public void DifferentFileDifferentInstances() throws PizzaException, LogHandlerException{
+				ArrayList<Pizza> pizzaArr1;
+				ArrayList<Pizza> pizzaArr2;
+				pizzaArr2 = LogHandler.populatePizzaDataset("C:\\Users\\You\\Documents\\PizzaParty\\asgn2\\logs\\20170101.txt");
+				pizzaArr1 = LogHandler.populatePizzaDataset("C:\\Users\\You\\Documents\\PizzaParty\\asgn2\\logs\\20170102.txt");
+				assertNotEquals(pizzaArr2, pizzaArr1);
+			}
+		
+		//calling createpizza method 
+			@Test
+			public void PopulateDataCallsCreatePizza() throws PizzaException, LogHandlerException{
+				ArrayList<Pizza> pizzaArr2;
+				pizzaArr2 = LogHandler.populatePizzaDataset("C:\\Users\\You\\Documents\\PizzaParty\\asgn2\\logs\\20170102.txt");
+				assertEquals(5, pizzaArr2.get(0).getQuantity(), 0);
+				assertEquals(9, pizzaArr2.get(1).getQuantity(), 0);
+			}	
 }

@@ -1,5 +1,17 @@
 package asgn2Tests;
 
+import static org.junit.Assert.*;
+
+import org.junit.Before;
+import org.junit.Test;
+
+import asgn2Customers.Customer;
+import asgn2Customers.CustomerFactory;
+import asgn2Customers.DriverDeliveryCustomer;
+import asgn2Customers.DroneDeliveryCustomer;
+import asgn2Customers.PickUpCustomer;
+import asgn2Exceptions.CustomerException;
+
 /**
  * A class the that tests the asgn2Customers.CustomerFactory class.
  * 
