@@ -8,7 +8,7 @@ package asgn2Tests;
  */
 public class CustomerFactoryTests {
 	// TO DO
-		PickUpCustomer test1;
+	PickUpCustomer test1;
 	
 	DriverDeliveryCustomer test2;
 	
