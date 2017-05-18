@@ -36,38 +36,25 @@ public abstract class Customer {
 	 * 
 	 */	
 	public Customer(String name, String mobileNumber, int locationX, int locationY, String type) throws CustomerException{
-		// set constructor variables to private variables
-		LocationX = locationX;
-		LocationY = locationY;
-		CustomerType = type;
-		Name = name;
-		MobileNumber = mobileNumber;
-		//between 1 and 20 characters not just white spaces
-		/*
-		if (name.length() > 0 && name.length() < 21){
-			if (name.trim() != null){
-				Name = name;
-			}
-		}
-		else {throw new CustomerException();}
-		
-		//field constraints: mobile number length = 10
-		if (mobileNumber.length() == 10 && mobileNumber.startsWith("0")){
-			MobileNumber = mobileNumber;
-			//System.out.println("Mobile Number was " + mobileNumber);
 
-		}
-		else {throw new CustomerException();}
-		*/
-		
-		//Leo: It doesn't throw the exception unless any tests unless I do this to test constraints.
+		//between 1 and 20 characters not just white spaces
 		if(name.length() <= 0 || name.length() > 21){
 			throw new CustomerException("Letter out of bounds");
 		}
-		else if (mobileNumber.length() != 10 || !mobileNumber.startsWith("0")){
-			throw new CustomerException("Nuber out of bounds");
+		else if (name.trim() == null){
+			throw new CustomerException("White Space Name");
 		}
-
+		else if (mobileNumber.length() != 10 || !mobileNumber.startsWith("0")){
+			throw new CustomerException("Mobile number out of bounds");
+		}
+		else {
+			// set constructor variables to private variables
+			LocationX = locationX;
+			LocationY = locationY;
+			CustomerType = type;
+			Name = name;
+			MobileNumber = mobileNumber;	
+			}
 	}
 	
 	/**
