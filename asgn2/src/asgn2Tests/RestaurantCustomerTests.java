@@ -85,7 +85,7 @@ public class RestaurantCustomerTests {
 	@Test
 	public void customerLocationLog1() throws CustomerException{
 		double loc = Math.abs(cusRes.getCustomerByIndex(0).getLocationX() + Math.abs(cusRes.getCustomerByIndex(0).getLocationY()));
-		assertNotEquals(cusRes.getCustomerByIndex(0).getDeliveryDistance(), loc);
+		assertEquals(cusRes.getCustomerByIndex(0).getDeliveryDistance(), loc);
 	}
 
 	//Log2
@@ -93,7 +93,7 @@ public class RestaurantCustomerTests {
 	public void customerLocationLog2() throws CustomerException, PizzaException, LogHandlerException{
 		cusRes.processLog("C:\\Users\\You\\Documents\\PizzaParty\\asgn2\\logs\\20170102.txt");
 		double loc = 0;
-		assertNotEquals(cusRes.getCustomerByIndex(3).getDeliveryDistance(), loc);
+		assertEquals(cusRes.getCustomerByIndex(3).getDeliveryDistance(), loc);
 	}
 	
 	//Log3
@@ -101,7 +101,7 @@ public class RestaurantCustomerTests {
 	public void customerLocationLog3() throws CustomerException, PizzaException, LogHandlerException{
 		cusRes.processLog("C:\\Users\\You\\Documents\\PizzaParty\\asgn2\\logs\\20170103.txt");
 		double loc = Math.sqrt((Math.pow(cusRes.getCustomerByIndex(2).getLocationX(), 2))+(Math.pow(cusRes.getCustomerByIndex(2).getLocationY(), 2)));
-		assertNotEquals(cusRes.getCustomerByIndex(2).getDeliveryDistance(), loc);
+		assertEquals(cusRes.getCustomerByIndex(2).getDeliveryDistance(), loc);
 	}
 	
 	//get Total delivery distance
