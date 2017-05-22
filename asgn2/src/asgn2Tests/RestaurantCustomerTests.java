@@ -1,5 +1,14 @@
 package asgn2Tests;
 
+import asgn2Restaurant.PizzaRestaurant;
+import static org.junit.Assert.*;
+
+import org.junit.Before;
+import org.junit.Test;
+
+import asgn2Exceptions.CustomerException;
+import asgn2Exceptions.LogHandlerException;
+import asgn2Exceptions.PizzaException;
 
 /**
  * A class that that tests the methods relating to the handling of Customer objects in the asgn2Restaurant.PizzaRestaurant
