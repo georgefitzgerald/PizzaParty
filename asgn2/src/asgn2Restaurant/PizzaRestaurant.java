@@ -142,7 +142,7 @@ public class PizzaRestaurant {
 	 */	
 	public double getTotalProfit(){
 		// TO DO
-		int profit = 0;
+		double profit = 0;
 		for(int i = 0; i < pizzas.size(); i++){
 			profit+=pizzas.get(i).getOrderProfit();
 		}
