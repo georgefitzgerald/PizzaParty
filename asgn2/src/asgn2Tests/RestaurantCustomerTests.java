@@ -109,4 +109,12 @@ public class RestaurantCustomerTests {
 	public void totalDeliveryDistanceLog1(){
 		
 	}
+	//testing reset Details
+	@Test
+	public void resetData() throws CustomerException, PizzaException, LogHandlerException{
+		cusRes.processLog("C:\\Users\\Leo\\Documents\\PizzaParty\\asgn2\\logs\\20170101.txt");
+		cusRes.resetDetails();
+		assertEquals(cusRes.getNumCustomerOrders(),0);
+		
+	}
 }
