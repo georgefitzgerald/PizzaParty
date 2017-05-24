@@ -27,12 +27,11 @@ public abstract class Pizza  {
 	protected LocalTime orderTime;
 	protected LocalTime deliveryTime;
 	final LocalTime minOrderTime = LocalTime.of(19, 00, 00);
-	final LocalTime maxOrderTime = LocalTime.of(23, 00, 00);
+	final LocalTime maxOrderTime = LocalTime.of(22, 59, 59);
 	
 	protected String type;
 	
-	protected double totalCostPerPizza;
-	protected double cost;
+	protected double cost = 0;
 	protected double price;
 	
 	protected List<PizzaTopping> top;
@@ -95,7 +94,7 @@ public abstract class Pizza  {
 	 */
 	public final double getCostPerPizza(){
 		// TO DO
-		return totalCostPerPizza/quantity;
+		return cost;
 		
 	}
 
@@ -105,7 +104,7 @@ public abstract class Pizza  {
 	 */
 	public final double getPricePerPizza(){
 		// TO DO
-		return price/quantity;
+		return price;
 	}
 
 	/**
@@ -114,7 +113,7 @@ public abstract class Pizza  {
 	 */
 	public final double getOrderCost(){
 		// TO DO
-		return totalCostPerPizza;
+		return totalCostPerPizza*quantity;
 		
 	}
 	
@@ -124,7 +123,7 @@ public abstract class Pizza  {
 	 */
 	public final double getOrderPrice(){
 		// TO DO
-		return this.getPricePerPizza()*this.getQuantity();
+		return getPricePerPizza()*getQuantity();
 	}
 	
 	
@@ -134,7 +133,7 @@ public abstract class Pizza  {
 	 */
 	public final double getOrderProfit(){
 		// TO DO
-		return this.getOrderPrice()-this.getOrderCost();
+		return getOrderPrice()-getOrderCost();
 		
 	}
 	
