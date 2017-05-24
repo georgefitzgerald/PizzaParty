@@ -3,6 +3,8 @@ package asgn2Tests;
 import static org.junit.Assert.*;
 
 import java.io.File;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 
 import org.junit.Test;
@@ -125,16 +127,31 @@ public class LogHandlerPizzaTests {
 				ArrayList<Pizza> pizzaArr1;
 				ArrayList<Pizza> pizzaArr2;
 
-				pizzaArr2 = LogHandler.populatePizzaDataset("C:\\Users\\You\\Documents\\PizzaParty\\asgn2\\logs\\20170102.txt");
-				pizzaArr1 = LogHandler.populatePizzaDataset("C:\\Users\\You\\Documents\\PizzaParty\\asgn2\\logs\\20170102.txt");
+				Path currentRelativePath = Paths.get("");
+				String s = currentRelativePath.toAbsolutePath().toString();
+				String path = s + "\\logs\\20170102.txt";
+				
+				
+				pizzaArr2 = LogHandler.populatePizzaDataset(path);
+				pizzaArr1 = LogHandler.populatePizzaDataset(path);
 				assertNotEquals(pizzaArr2.hashCode(), pizzaArr1.hashCode());
 			}
 			@Test //different file
 			public void DifferentFileDifferentInstances() throws PizzaException, LogHandlerException{
 				ArrayList<Pizza> pizzaArr1;
 				ArrayList<Pizza> pizzaArr2;
-				pizzaArr2 = LogHandler.populatePizzaDataset("C:\\Users\\You\\Documents\\PizzaParty\\asgn2\\logs\\20170101.txt");
-				pizzaArr1 = LogHandler.populatePizzaDataset("C:\\Users\\You\\Documents\\PizzaParty\\asgn2\\logs\\20170102.txt");
+				
+				Path currentRelativePath = Paths.get("");
+				String s = currentRelativePath.toAbsolutePath().toString();
+				String path = s + "\\logs\\20170101.txt";
+				
+				
+				pizzaArr2 = LogHandler.populatePizzaDataset(path);
+				
+				currentRelativePath = Paths.get("");
+				s = currentRelativePath.toAbsolutePath().toString();
+				path = s + "\\logs\\20170102.txt";
+				pizzaArr1 = LogHandler.populatePizzaDataset(path);
 				assertNotEquals(pizzaArr2.hashCode(), pizzaArr1.hashCode());
 			}
 		
@@ -142,7 +159,11 @@ public class LogHandlerPizzaTests {
 			@Test
 			public void PopulateDataCallsCreatePizza() throws PizzaException, LogHandlerException{
 				ArrayList<Pizza> pizzaArr2;
-				pizzaArr2 = LogHandler.populatePizzaDataset("C:\\Users\\You\\Documents\\PizzaParty\\asgn2\\logs\\20170102.txt");
+				Path currentRelativePath = Paths.get("");
+				String s = currentRelativePath.toAbsolutePath().toString();
+				String path = s + "\\logs\\20170102.txt";
+				
+				pizzaArr2 = LogHandler.populatePizzaDataset(path);
 				assertEquals(5, pizzaArr2.get(0).getQuantity(), 0);
 				assertEquals(9, pizzaArr2.get(1).getQuantity(), 0);
 			}	
