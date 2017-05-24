@@ -74,7 +74,7 @@ public class PizzaFactoryTests {
 			vege1 = PizzaFactory.getPizza("PZV", 1, otime, dtime);
 			Pizza vege;
 			vege = PizzaFactory.getPizza("PZV", 1, otime, dtime);
-			assertNotEquals(vege1, vege);
+			assertNotEquals(vege1.hashCode(), vege.hashCode());
 		}
 		
 		@Test
@@ -83,7 +83,8 @@ public class PizzaFactoryTests {
 			meat1 = PizzaFactory.getPizza("PZL", 1, otime, dtime);
 			Pizza meat2;
 			meat2 = PizzaFactory.getPizza("PZL", 1, otime, dtime);
-			assertNotEquals(meat1, meat2);
+			//hashcode gets a unique identifier for each object
+			assertNotEquals(meat1.hashCode(), meat2.hashCode());
 		}
 		
 		@Test
@@ -92,7 +93,7 @@ public class PizzaFactoryTests {
 			marg1 = PizzaFactory.getPizza("PZM", 1, otime, dtime);
 			Pizza marg2;
 			marg2 = PizzaFactory.getPizza("PZM", 1, otime, dtime);
-			assertNotEquals(marg1, marg2);
+			assertNotEquals(marg1.hashCode(), marg2.hashCode());
 		}
 		
 		@Test

@@ -147,13 +147,12 @@ public class RestaurantPizzaTests {
 			rest.processLog(path);
 			assertEquals(rest.getTotalProfit(), 2849, 0);
 		}
-		//correct profit with multiple different pizzas with various quantities. 
-		//create own log file
+
 	@Test
 	public void resetData() throws CustomerException, PizzaException, LogHandlerException{
-		cusRes.processLog("C:\\Users\\Leo\\Documents\\PizzaParty\\asgn2\\logs\\20170101.txt");
-		cusRes.resetDetails();
-		assertEquals(cusRes.getNumPizzaOrders(),0);
+		
+		rest.resetDetails();
+		assertEquals(rest.getNumPizzaOrders(),0);
 		
 	}
 

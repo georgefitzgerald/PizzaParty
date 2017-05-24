@@ -2,6 +2,7 @@ package asgn2Tests;
 
 import static org.junit.Assert.*;
 
+import java.io.File;
 import java.util.ArrayList;
 
 import org.junit.Test;
@@ -40,6 +41,8 @@ public class LogHandlerPizzaTests {
 				String line = "21:17:00,21:27:00,Emma Brown,0602547760,DVC,-1,0,5";
 				pizza = LogHandler.createPizza(line);
 			}
+			
+			//Test that each pizza related piece of data missing throws exception. 
 			
 			@Test (expected = PizzaException.class)// wrong code
 			public void InocrrectCodeCreatePizza() throws PizzaException, LogHandlerException{
@@ -121,9 +124,10 @@ public class LogHandlerPizzaTests {
 			public void SameFileDifferentInstances() throws PizzaException, LogHandlerException{
 				ArrayList<Pizza> pizzaArr1;
 				ArrayList<Pizza> pizzaArr2;
+
 				pizzaArr2 = LogHandler.populatePizzaDataset("C:\\Users\\You\\Documents\\PizzaParty\\asgn2\\logs\\20170102.txt");
 				pizzaArr1 = LogHandler.populatePizzaDataset("C:\\Users\\You\\Documents\\PizzaParty\\asgn2\\logs\\20170102.txt");
-				assertNotEquals(pizzaArr2.toString(), pizzaArr1.toString());
+				assertNotEquals(pizzaArr2.hashCode(), pizzaArr1.hashCode());
 			}
 			@Test //different file
 			public void DifferentFileDifferentInstances() throws PizzaException, LogHandlerException{
@@ -131,7 +135,7 @@ public class LogHandlerPizzaTests {
 				ArrayList<Pizza> pizzaArr2;
 				pizzaArr2 = LogHandler.populatePizzaDataset("C:\\Users\\You\\Documents\\PizzaParty\\asgn2\\logs\\20170101.txt");
 				pizzaArr1 = LogHandler.populatePizzaDataset("C:\\Users\\You\\Documents\\PizzaParty\\asgn2\\logs\\20170102.txt");
-				assertNotEquals(pizzaArr2, pizzaArr1);
+				assertNotEquals(pizzaArr2.hashCode(), pizzaArr1.hashCode());
 			}
 		
 		//calling createpizza method 

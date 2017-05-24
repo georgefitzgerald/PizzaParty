@@ -47,6 +47,10 @@ public abstract class Customer {
 		else if (mobileNumber.length() != 10 || !mobileNumber.startsWith("0")){
 			throw new CustomerException("Mobile number out of bounds");
 		}
+		//if any of the other fields are null throw exception
+		else if (name==null){
+			throw new CustomerException("Null field");
+		}
 		else {
 			// set constructor variables to private variables
 			LocationX = locationX;

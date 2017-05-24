@@ -52,7 +52,7 @@ public class CustomerFactory {
 
 		}
 		else {		
-	        System.out.println("Invalid CustomerCode" + customerCode);
+	        //System.out.println("Invalid CustomerCode" + customerCode);
 	        throw new CustomerException();
         }
 	}
