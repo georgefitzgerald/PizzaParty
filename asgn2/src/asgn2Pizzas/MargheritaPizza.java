@@ -40,6 +40,7 @@ public class MargheritaPizza extends Pizza {
 		
 		top.add(PizzaTopping.TOMATO);
 		top.add(PizzaTopping.CHEESE);
+		calculateCostPerPizza();
 	}
 	
 
