@@ -84,6 +84,11 @@ public class RestaurantCustomerTests {
 		assertEquals(cusRes.getCustomerByIndex(0).getCustomerType(), "DriverDelivery");
 		assertEquals(cusRes.getCustomerByIndex(0).getName(), "Casey Jones");
 	}
+	//Gets customer out of index
+	@Test (expected = CustomerException.class)
+	public void getsWrongCustomer() throws CustomerException{
+		assertEquals(cusRes.getCustomerByIndex(26).getCustomerType(), "DriverDelivery");
+	}
 	//doesn't return the same customer 
 	@Test
 	public void createsSeparateCustomer() throws CustomerException{

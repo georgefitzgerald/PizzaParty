@@ -56,25 +56,15 @@ public class PizzaRestaurant {
 	 * @throws CustomerException If the log file contains semantic errors leading that violate the customer constraints listed in Section 5.3 of the Assignment Specification or contain an invalid customer code (passed by another class).
 	 * @throws PizzaException If the log file contains semantic errors leading that violate the pizza constraints listed in Section 5.3 of the Assignment Specification or contain an invalid pizza code (passed by another class).
 	 * @throws LogHandlerException If there was a problem with the log file not related to the semantic errors above (passed by another class).
-     *test
+     * throws from related class (LogHandler.java)
 	 */
 	public boolean processLog(String filename) throws CustomerException, PizzaException, LogHandlerException{
-//		customers = LogHandler.populateCustomerDataset(filename);
-		//pizzas = LogHandler.populatePizzaDataset(filename);
-		//BufferedReader br = null;
-		
-		//this exception will be thrown by populatePizza/Customer
-//		try {
-//			br = new BufferedReader(new FileReader(filename));
-//		} catch (FileNotFoundException e) {
-//            throw new LogHandlerException();
-//		}
 		
 			customers = LogHandler.populateCustomerDataset(filename);
 			pizzas = LogHandler.populatePizzaDataset(filename);
 
 		
-		return true; // Leo: it's true if processed correctly, other wise exception thrown.
+		return true; 
 	}
 
 	/**
@@ -82,8 +72,14 @@ public class PizzaRestaurant {
 	 * @param index - The index within the customers field to retrieve.
 	 * @return The Customer object located at the specified index.
 	 * @throws CustomerException if index is invalid.
+	 * throws when customer of specific index does not exist
 	 */
 	public Customer getCustomerByIndex(int index) throws CustomerException{
+		
+		if(index > customers.size()){
+			throw new CustomerException("index is out of bounds");
+		}
+		
 		return customers.get(index);
 	}
 	
@@ -92,6 +88,8 @@ public class PizzaRestaurant {
 	 * @param index - The index within the pizzas field to retrieve.
 	 * @return The Pizza object located at the specified index.
 	 * @throws PizzaException if index is invalid.
+	 * throws if the specific index does not exist
+	 * 
 	 */	
 	public Pizza getPizzaByIndex(int index) throws PizzaException{
 		return pizzas.get(index);
