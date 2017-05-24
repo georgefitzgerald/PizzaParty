@@ -40,6 +40,7 @@ public class MeatLoversPizza extends Pizza {
 		top.add(PizzaTopping.EGGPLANT);
 		top.add(PizzaTopping.MUSHROOM);
 		top.add(PizzaTopping.CAPSICUM);
+		calculateCostPerPizza();
 	}
 
 }
