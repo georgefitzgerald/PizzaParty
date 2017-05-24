@@ -77,7 +77,7 @@ public class PizzaRestaurant {
 	public Customer getCustomerByIndex(int index) throws CustomerException{
 		
 		if(index > customers.size()){
-			throw new CustomerException("index is out of bounds");
+			throw new CustomerException("Customer index is out of bounds");
 		}
 		
 		return customers.get(index);
@@ -92,6 +92,9 @@ public class PizzaRestaurant {
 	 * 
 	 */	
 	public Pizza getPizzaByIndex(int index) throws PizzaException{
+		if(index > pizzas.size()){
+			throw new PizzaException("Pizza index is out of bounds");
+		}
 		return pizzas.get(index);
 	}
 	
