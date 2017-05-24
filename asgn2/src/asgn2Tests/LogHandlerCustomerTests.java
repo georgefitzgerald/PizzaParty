@@ -1,4 +1,24 @@
-Customer cus;
+package asgn2Tests;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
+
+import java.util.ArrayList;
+
+import org.junit.Test;
+
+import asgn2Customers.Customer;
+import asgn2Exceptions.CustomerException;
+import asgn2Exceptions.LogHandlerException;
+import asgn2Restaurant.LogHandler;
+
+/**
+ * A class that tests the methods relating to the creation of Customer objects in the asgn2Restaurant.LogHander class.
+ *
+ * @author Person A
+ */
+public class LogHandlerCustomerTests {
+	Customer cus;
 	
 	//Create Customer correctly parses string to getCustomer	
 	//throws exceptions when invalid parameters (functionality of customerfactory.getCustomer)
