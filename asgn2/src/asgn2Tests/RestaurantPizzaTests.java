@@ -99,19 +99,19 @@ public class RestaurantPizzaTests {
 		//correct with when profit 0 - 1000
 		@Test 
 		public void correctProfitLog1(){
-			assertEquals(rest.getTotalProfit(), 30, 0);
+			assertEquals(rest.getTotalProfit(), 36.5, 0);
 		}
 		@Test //
 		public void correctProfitLog2() throws CustomerException, PizzaException, LogHandlerException{
 			rest = new PizzaRestaurant();
 			rest.processLog("C:\\Users\\You\\Documents\\ PizzaParty\\asgn2\\logs\\20170102.txt");
-			assertEquals(rest.getTotalProfit(), 108, 0);
+			assertEquals(rest.getTotalProfit(), 316.5, 0);
 		}
 		@Test //
 		public void correctProfitLog3() throws CustomerException, PizzaException, LogHandlerException{
 			rest = new PizzaRestaurant();
 			rest.processLog("C:\\Users\\You\\Documents\\PizzaParty\\asgn2\\logs\\20170103.txt");
-			assertEquals(rest.getTotalProfit(), 998, 0);
+			assertEquals(rest.getTotalProfit(), 2849, 0);
 		}
 		//correct profit with multiple different pizzas with various quantities. 
 		//create own log file
