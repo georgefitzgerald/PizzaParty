@@ -3,6 +3,9 @@ package asgn2Tests;
 import asgn2Restaurant.PizzaRestaurant;
 import static org.junit.Assert.*;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -19,11 +22,20 @@ import asgn2Exceptions.PizzaException;
 public class RestaurantCustomerTests {
 	// TO DO
 	PizzaRestaurant cusRes;
-	
+	String path1;
+	String path2;
+	String path3;
+	Path currentRelativePath = Paths.get("");
+	String s = currentRelativePath.toAbsolutePath().toString();
 	@Before //read in data structure
 	public void RestaurantInstance() throws CustomerException, PizzaException, LogHandlerException{
 		cusRes = new PizzaRestaurant();
-		cusRes.processLog("C:\\Users\\You\\Documents\\PizzaParty\\asgn2\\logs\\20170101.txt");
+		
+		path1 = s + "\\logs\\20170101.txt";
+		cusRes.processLog(path1);
+		
+		
+
 	}
 	
 	//Constructor initialization
@@ -61,8 +73,8 @@ public class RestaurantCustomerTests {
 	@Test
 	public void returnsTrueWhenSucces() throws CustomerException, PizzaException, LogHandlerException{
 		//cusRes = new PizzaRestaurant();
-		String filename = "C:\\Users\\You\\Documents\\PizzaParty\\asgn2\\logs\\20170101.txt";
-		assertEquals(cusRes.processLog(filename), true);
+
+		assertEquals(cusRes.processLog(path1), true);
 	}
 	
 	//Get customer by index
@@ -91,7 +103,8 @@ public class RestaurantCustomerTests {
 	//Log2
 	@Test
 	public void customerLocationLog2() throws CustomerException, PizzaException, LogHandlerException{
-		cusRes.processLog("C:\\Users\\You\\Documents\\PizzaParty\\asgn2\\logs\\20170102.txt");
+		path2 = s + "\\logs\\20170102.txt";
+		cusRes.processLog(path2);
 		double loc = 0;
 		assertEquals(cusRes.getCustomerByIndex(3).getDeliveryDistance(), loc, 0);
 	}
@@ -99,16 +112,16 @@ public class RestaurantCustomerTests {
 	//Log3
 	@Test
 	public void customerLocationLog3() throws CustomerException, PizzaException, LogHandlerException{
-		cusRes.processLog("C:\\Users\\You\\Documents\\PizzaParty\\asgn2\\logs\\20170103.txt");
+		path3 = s + "\\logs\\20170103.txt";
+		cusRes.processLog(path3);
 		double loc = Math.sqrt((Math.pow(cusRes.getCustomerByIndex(2).getLocationX(), 2))+(Math.pow(cusRes.getCustomerByIndex(2).getLocationY(), 2)));
 		assertEquals(cusRes.getCustomerByIndex(2).getDeliveryDistance(), loc, 0);
 	}
 	
 	//get Total delivery distance
-	//get Total delivery distance
 	@Test
 	public void totalDeliveryDistanceLog1() throws CustomerException, PizzaException, LogHandlerException{
-		cusRes.processLog("C:\\Users\\Leo\\Documents\\PizzaParty\\asgn2\\logs\\20170101.txt");
+		cusRes.processLog(path1);
 		double distance= 0;
 		
 		for (int i=0; i < cusRes.getNumPizzaOrders();i++){
@@ -120,7 +133,8 @@ public class RestaurantCustomerTests {
 	
 	@Test
 	public void totalDeliveryDistanceLog2() throws CustomerException, PizzaException, LogHandlerException{
-		cusRes.processLog("C:\\Users\\Leo\\Documents\\PizzaParty\\asgn2\\logs\\20170102.txt");
+		path2 = s + "\\logs\\20170102.txt";
+		cusRes.processLog(path2);
 		double distance= 0;
 		
 		for (int i=0; i < cusRes.getNumPizzaOrders();i++){
@@ -132,7 +146,8 @@ public class RestaurantCustomerTests {
 	
 	@Test
 	public void totalDeliveryDistanceLog3() throws CustomerException, PizzaException, LogHandlerException{
-		cusRes.processLog("C:\\Users\\Leo\\Documents\\PizzaParty\\asgn2\\logs\\20170103.txt");
+		path3 = s + "\\logs\\20170103.txt";
+		cusRes.processLog(path3);
 		double distance= 0;
 		
 		for (int i=0; i < cusRes.getNumPizzaOrders();i++){
@@ -141,10 +156,10 @@ public class RestaurantCustomerTests {
 		assertEquals(cusRes.getTotalDeliveryDistance(), distance, 0);
 		
 	}
-	//testing reset Details
+	
 	@Test
 	public void resetData() throws CustomerException, PizzaException, LogHandlerException{
-		cusRes.processLog("C:\\Users\\Leo\\Documents\\PizzaParty\\asgn2\\logs\\20170101.txt");
+		cusRes.processLog(path1);
 		cusRes.resetDetails();
 		assertEquals(cusRes.getNumCustomerOrders(),0);
 		
