@@ -57,7 +57,7 @@ public class PizzaFactoryTests {
 		public void CreateMeatLoverClass() throws PizzaException{
 			Pizza marg;
 			marg = PizzaFactory.getPizza("PZL", 1, otime, dtime);
-			assertEquals(marg.getPizzaType(), "MeatLovers");
+			assertEquals(marg.getPizzaType(), "Meat Lovers");
 		}
 		
 		@Test
