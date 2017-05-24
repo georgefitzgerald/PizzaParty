@@ -105,8 +105,40 @@ public class RestaurantCustomerTests {
 	}
 	
 	//get Total delivery distance
+	//get Total delivery distance
 	@Test
-	public void totalDeliveryDistanceLog1(){
+	public void totalDeliveryDistanceLog1() throws CustomerException, PizzaException, LogHandlerException{
+		cusRes.processLog("C:\\Users\\Leo\\Documents\\PizzaParty\\asgn2\\logs\\20170101.txt");
+		double distance= 0;
+		
+		for (int i=0; i < cusRes.getNumPizzaOrders();i++){
+			distance += cusRes.getCustomerByIndex(i).getDeliveryDistance();
+		}
+		assertEquals(cusRes.getTotalDeliveryDistance(), distance, 0);
+		
+	}
+	
+	@Test
+	public void totalDeliveryDistanceLog2() throws CustomerException, PizzaException, LogHandlerException{
+		cusRes.processLog("C:\\Users\\Leo\\Documents\\PizzaParty\\asgn2\\logs\\20170102.txt");
+		double distance= 0;
+		
+		for (int i=0; i < cusRes.getNumPizzaOrders();i++){
+			distance += cusRes.getCustomerByIndex(i).getDeliveryDistance();
+		}
+		assertEquals(cusRes.getTotalDeliveryDistance(), distance, 0);
+		
+	}
+	
+	@Test
+	public void totalDeliveryDistanceLog3() throws CustomerException, PizzaException, LogHandlerException{
+		cusRes.processLog("C:\\Users\\Leo\\Documents\\PizzaParty\\asgn2\\logs\\20170103.txt");
+		double distance= 0;
+		
+		for (int i=0; i < cusRes.getNumPizzaOrders();i++){
+			distance += cusRes.getCustomerByIndex(i).getDeliveryDistance();
+		}
+		assertEquals(cusRes.getTotalDeliveryDistance(), distance, 0);
 		
 	}
 	//testing reset Details
