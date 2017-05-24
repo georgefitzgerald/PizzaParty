@@ -3,6 +3,10 @@ package asgn2Tests;
 import asgn2Restaurant.PizzaRestaurant;
 import static org.junit.Assert.*;
 
+import java.io.File;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -24,7 +28,12 @@ public class RestaurantPizzaTests {
 	@Before //read in data structure
 	public void RestaurantInstance() throws CustomerException, PizzaException, LogHandlerException{
 		rest = new PizzaRestaurant();
-		rest.processLog("C:\\Users\\You\\Documents\\PizzaParty\\asgn2\\logs\\20170101.txt");
+		//get the current directory path and append log file to it. 
+		Path currentRelativePath = Paths.get("");
+		String s = currentRelativePath.toAbsolutePath().toString();
+		String path = s + "\\logs\\20170101.txt";
+		
+		rest.processLog(path);
 	}
 	
 	//Constructor initialization
@@ -59,8 +68,14 @@ public class RestaurantPizzaTests {
 		@Test
 		public void returnsTrueWhenSucces() throws CustomerException, PizzaException, LogHandlerException{
 			rest = new PizzaRestaurant();
-			String filename = "C:\\Users\\You\\Documents\\PizzaParty\\asgn2\\logs\\20170101.txt";
-			assertEquals(rest.processLog(filename), true);
+			
+			Path currentRelativePath = Paths.get("");
+			String s = currentRelativePath.toAbsolutePath().toString();
+			
+			String path = s + "\\logs\\20170101.txt";
+			
+
+			assertEquals(rest.processLog(path), true);
 		}
 		
 	//Get pizza by index
@@ -86,17 +101,27 @@ public class RestaurantPizzaTests {
 		@Test //log 2
 		public void GetOrderCountLog2() throws CustomerException, PizzaException, LogHandlerException{
 			rest = new PizzaRestaurant();
-			rest.processLog("C:\\Users\\You\\Documents\\PizzaParty\\asgn2\\logs\\20170102.txt");
+			
+			Path currentRelativePath = Paths.get("");
+			String s = currentRelativePath.toAbsolutePath().toString();
+			String path = s + "\\logs\\20170102.txt";
+			
+			rest.processLog(path);
 			assertEquals(rest.getNumPizzaOrders(), 10, 0);
 		}
 		@Test //log3
 		public void GetOrderCountLog3() throws CustomerException, PizzaException, LogHandlerException{
 			rest = new PizzaRestaurant();
-			rest.processLog("C:\\Users\\You\\Documents\\PizzaParty\\asgn2\\logs\\20170103.txt");
+			Path currentRelativePath = Paths.get("");
+			String s = currentRelativePath.toAbsolutePath().toString();
+			String path = s + "\\logs\\20170103.txt";
+			
+			
+			rest.processLog(path);
 			assertEquals(rest.getNumPizzaOrders(), 100, 0);
 		}
 	//Gets total profit
-		//correct with when profit 0 - 1000
+		//correct when profit 0 - 1000
 		@Test 
 		public void correctProfitLog1(){
 			assertEquals(rest.getTotalProfit(), 36.5, 0);
@@ -104,13 +129,22 @@ public class RestaurantPizzaTests {
 		@Test //
 		public void correctProfitLog2() throws CustomerException, PizzaException, LogHandlerException{
 			rest = new PizzaRestaurant();
-			rest.processLog("C:\\Users\\You\\Documents\\ PizzaParty\\asgn2\\logs\\20170102.txt");
+			
+			Path currentRelativePath = Paths.get("");
+			String s = currentRelativePath.toAbsolutePath().toString();
+			String path = s + "\\logs\\20170102.txt";
+			
+			rest.processLog(path);
 			assertEquals(rest.getTotalProfit(), 316.5, 0);
 		}
 		@Test //
 		public void correctProfitLog3() throws CustomerException, PizzaException, LogHandlerException{
 			rest = new PizzaRestaurant();
-			rest.processLog("C:\\Users\\You\\Documents\\PizzaParty\\asgn2\\logs\\20170103.txt");
+			Path currentRelativePath = Paths.get("");
+			String s = currentRelativePath.toAbsolutePath().toString();
+			String path = s + "\\logs\\20170103.txt";
+			
+			rest.processLog(path);
 			assertEquals(rest.getTotalProfit(), 2849, 0);
 		}
 		//correct profit with multiple different pizzas with various quantities. 
