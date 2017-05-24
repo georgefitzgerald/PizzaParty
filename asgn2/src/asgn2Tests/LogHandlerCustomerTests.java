@@ -1,8 +1,9 @@
 package asgn2Tests;
-
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 
 import org.junit.Test;
@@ -11,7 +12,6 @@ import asgn2Customers.Customer;
 import asgn2Exceptions.CustomerException;
 import asgn2Exceptions.LogHandlerException;
 import asgn2Restaurant.LogHandler;
-
 /**
  * A class that tests the methods relating to the creation of Customer objects in the asgn2Restaurant.LogHander class.
  *
@@ -19,7 +19,11 @@ import asgn2Restaurant.LogHandler;
  */
 public class LogHandlerCustomerTests {
 	Customer cus;
+	String path1;
+	String path2;
 	
+	Path currentRelativePath = Paths.get("");
+	String s = currentRelativePath.toAbsolutePath().toString();
 	//Create Customer correctly parses string to getCustomer	
 	//throws exceptions when invalid parameters (functionality of customerfactory.getCustomer)
 		
@@ -37,7 +41,7 @@ public class LogHandlerCustomerTests {
 			
 	@Test (expected = LogHandlerException.class)//missing data
 	public void LineMissingDataCreateCustomer() throws CustomerException, LogHandlerException{
-		String line = "21:17:00,21:27:00,Emma Brown,0602547760,-1,0,PZM,5";
+		String line = "21:17:00,21:27:00,0602547760,-1,0,PZM,5";
 		cus = LogHandler.createCustomer(line);
 	}
 	
@@ -144,16 +148,19 @@ public class LogHandlerCustomerTests {
 	public void SameFileDifferentInstances() throws CustomerException, LogHandlerException{
 		ArrayList<Customer> cusArr1;
 		ArrayList<Customer> cusArr2;
-		cusArr1 = LogHandler.populateCustomerDataset("C:\\Users\\Leo\\Documents\\PizzaParty\\asgn2\\logs\\20170102.txt");
-		cusArr2 = LogHandler.populateCustomerDataset("C:\\Users\\Leo\\Documents\\PizzaParty\\asgn2\\logs\\20170102.txt");
+		path2 = s + "\\logs\\20170102.txt";
+		cusArr1 = LogHandler.populateCustomerDataset(path2);
+		cusArr2 = LogHandler.populateCustomerDataset(path2);
 		assertNotEquals(cusArr1.toString(), cusArr2.toString());
 	}
 	@Test //different file
 	public void DifferentFileDifferentInstances() throws CustomerException, LogHandlerException{
 		ArrayList<Customer> cusArr1;
 		ArrayList<Customer> cusArr2;
-		cusArr1 = LogHandler.populateCustomerDataset("C:\\Users\\Leo\\Documents\\PizzaParty\\asgn2\\logs\\20170101.txt");
-		cusArr2 = LogHandler.populateCustomerDataset("C:\\Users\\Leo\\Documents\\PizzaParty\\asgn2\\logs\\20170102.txt");
+		path1 = s + "\\logs\\20170101.txt";
+		path2 = s + "\\logs\\20170102.txt";
+		cusArr1 = LogHandler.populateCustomerDataset(path1);
+		cusArr2 = LogHandler.populateCustomerDataset(path2);
 		assertNotEquals(cusArr1, cusArr2);
 	}
 		
@@ -161,7 +168,9 @@ public class LogHandlerCustomerTests {
 	@Test
 	public void PopulateDataCallsCreateCustomer() throws CustomerException, LogHandlerException{
 		ArrayList<Customer> cusArr1;
-		cusArr1 = LogHandler.populateCustomerDataset("C:\\Users\\Leo\\Documents\\PizzaParty\\asgn2\\logs\\20170102.txt");
+		path2 = s + "\\logs\\20170102.txt";
+		cusArr1 = LogHandler.populateCustomerDataset(path2);
 		assertEquals("Emma Brown", cusArr1.get(0).getName());
 		assertEquals("Lucas Anderson", cusArr1.get(1).getName());
 	}	
+}
