@@ -40,12 +40,6 @@ public class LogHandlerCustomerTests {
 		String line = "21:17:00,21:27:00,Emma Brown,0602547760,-1,0,PZM,5";
 		cus = LogHandler.createCustomer(line);
 	}
-			
-	@Test (expected = CustomerException.class)// wrong code
-	public void InocrrectCodeCreateCustomer() throws CustomerException, LogHandlerException{
-		String line = "21:17:00,21:27:00,0602547760,PUC,-1,0,PZM,5";
-		cus = LogHandler.createCustomer(line);
-	}
 	
 	@Test (expected = CustomerException.class)// wrong quantity
 	public void tooMuchLetterName() throws CustomerException, LogHandlerException{
