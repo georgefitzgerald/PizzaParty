@@ -1,22 +1,4 @@
-package asgn2Tests;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
-
-import java.util.ArrayList;
-
-import org.junit.Test;
-
-import asgn2Customers.Customer;
-import asgn2Exceptions.CustomerException;
-import asgn2Exceptions.LogHandlerException;
-import asgn2Restaurant.LogHandler;
-/**
- * A class that tests the methods relating to the creation of Customer objects in the asgn2Restaurant.LogHander class.
- *
- * @author Person A
- */
-public class LogHandlerCustomerTests {
-	Customer cus;
+Customer cus;
 	
 	//Create Customer correctly parses string to getCustomer	
 	//throws exceptions when invalid parameters (functionality of customerfactory.getCustomer)
@@ -35,34 +17,27 @@ public class LogHandlerCustomerTests {
 			
 	@Test (expected = LogHandlerException.class)//missing data
 	public void LineMissingDataCreateCustomer() throws CustomerException, LogHandlerException{
-		String line = "21:17:00,21:27:00,Emma Brown,0602547760,DVC,-1,0,5";
+		String line = "21:17:00,21:27:00,Emma Brown,0602547760,-1,0,PZM,5";
 		cus = LogHandler.createCustomer(line);
 	}
 			
 	@Test (expected = CustomerException.class)// wrong code
 	public void InocrrectCodeCreateCustomer() throws CustomerException, LogHandlerException{
-		String line = "21:17:00,21:27:00,Emma Brown,0602547760,DVC,-1,0,KKK,5";
+		String line = "21:17:00,21:27:00,0602547760,PUC,-1,0,PZM,5";
 		cus = LogHandler.createCustomer(line);
 	}
 	
 	@Test (expected = CustomerException.class)// wrong quantity
-	public void InocrrectQuantity100CreateCustomer() throws CustomerException, LogHandlerException{
-		String line = "21:17:00,21:27:00,Emma Brown,0602547760,DVC,-1,0,KKK,100";
+	public void tooMuchLetterName() throws CustomerException, LogHandlerException{
+		String line = "21:17:00,21:27:00,This is a very long Name cause it can be this long Brown,0602547760,DVC,-1,0,PZV,100";
 		cus = LogHandler.createCustomer(line);
 	}
 	
 	@Test (expected = CustomerException.class)// wrong quantity
-	public void InocrrectQuantity1CreateCustomer() throws CustomerException, LogHandlerException{
-		String line = "21:17:00,21:27:00,Emma Brown,0602547760,DVC,-1,0,KKK,-1";
+	public void inCorrectPhoneNumber() throws CustomerException, LogHandlerException{
+		String line = "21:17:00,21:27:00,Emma Brown,6602547760,DVC,-1,0,PZV,-1";
 		cus = LogHandler.createCustomer(line);
 	}
-	
-	@Test (expected = CustomerException.class)// wrong time
-	public void InocrrectTime1CreateCustomer() throws CustomerException, LogHandlerException{
-		String line = "03:17:00,05:27:00,Emma Brown,0602547760,DVC,-1,0,KKK,-1";
-		cus = LogHandler.createCustomer(line);
-	}
-			
 	//Correct Customer classes created 
 	//Name
 	@Test
@@ -139,7 +114,7 @@ public class LogHandlerCustomerTests {
 	public void correctLocationDroneY() throws CustomerException, LogHandlerException{
 		String line = "20:00:00,20:25:00,April O'Neal,0987654321,DNC,3,4,PZM,1";
 		cus = LogHandler.createCustomer(line);
-		assertEquals(cus.getLocationX(), 4);
+		assertEquals(cus.getLocationY(), 4);
 	}
 				
 	//PopulateDataset - correctly reads a file into a customer array 
@@ -155,16 +130,16 @@ public class LogHandlerCustomerTests {
 	public void SameFileDifferentInstances() throws CustomerException, LogHandlerException{
 		ArrayList<Customer> cusArr1;
 		ArrayList<Customer> cusArr2;
-		cusArr1 = LogHandler.populateCustomerDataset("C:\\Users\\You\\Documents\\PizzaParty\\asgn2\\logs\\20170102.txt");
-		cusArr2 = LogHandler.populateCustomerDataset("C:\\Users\\You\\Documents\\PizzaParty\\asgn2\\logs\\20170102.txt");
+		cusArr1 = LogHandler.populateCustomerDataset("C:\\Users\\Leo\\Documents\\PizzaParty\\asgn2\\logs\\20170102.txt");
+		cusArr2 = LogHandler.populateCustomerDataset("C:\\Users\\Leo\\Documents\\PizzaParty\\asgn2\\logs\\20170102.txt");
 		assertNotEquals(cusArr1.toString(), cusArr2.toString());
 	}
 	@Test //different file
 	public void DifferentFileDifferentInstances() throws CustomerException, LogHandlerException{
 		ArrayList<Customer> cusArr1;
 		ArrayList<Customer> cusArr2;
-		cusArr1 = LogHandler.populateCustomerDataset("C:\\Users\\You\\Documents\\PizzaParty\\asgn2\\logs\\20170101.txt");
-		cusArr2 = LogHandler.populateCustomerDataset("C:\\Users\\You\\Documents\\PizzaParty\\asgn2\\logs\\20170102.txt");
+		cusArr1 = LogHandler.populateCustomerDataset("C:\\Users\\Leo\\Documents\\PizzaParty\\asgn2\\logs\\20170101.txt");
+		cusArr2 = LogHandler.populateCustomerDataset("C:\\Users\\Leo\\Documents\\PizzaParty\\asgn2\\logs\\20170102.txt");
 		assertNotEquals(cusArr1, cusArr2);
 	}
 		
@@ -172,8 +147,7 @@ public class LogHandlerCustomerTests {
 	@Test
 	public void PopulateDataCallsCreateCustomer() throws CustomerException, LogHandlerException{
 		ArrayList<Customer> cusArr1;
-		cusArr1 = LogHandler.populateCustomerDataset("C:\\Users\\You\\Documents\\PizzaParty\\asgn2\\logs\\20170102.txt");
-		assertEquals("Emma Brown", cusArr1.get(0).getName(), 0);
-		assertEquals("Lucas Anderson", cusArr1.get(1).getName(), 0);
+		cusArr1 = LogHandler.populateCustomerDataset("C:\\Users\\Leo\\Documents\\PizzaParty\\asgn2\\logs\\20170102.txt");
+		assertEquals("Emma Brown", cusArr1.get(0).getName());
+		assertEquals("Lucas Anderson", cusArr1.get(1).getName());
 	}	
-}
