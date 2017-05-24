@@ -38,9 +38,10 @@ public class VegetarianPizza extends Pizza {
 		
 		top.add(PizzaTopping.TOMATO);
 		top.add(PizzaTopping.CHEESE);
-		top.add(PizzaTopping.BACON);
-		top.add(PizzaTopping.PEPPERONI);
-		top.add(PizzaTopping.SALAMI);
+		top.add(PizzaTopping.EGGPLANT);
+		top.add(PizzaTopping.MUSHROOM);
+		top.add(PizzaTopping.CAPSICUM);
+		calculateCostPerPizza();
 	}
 
 }
