@@ -309,6 +309,9 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 			CDisplay.append("\n"+restaurant.getCustomerByIndex(i).getName());
 			CDisplay.append(", Type:" + restaurant.getCustomerByIndex(i).getCustomerType());
 			CDisplay.append(", Num:" + restaurant.getCustomerByIndex(i).getMobileNumber());
+/*			double totalDist = restaurant.getCustomerByIndex(i).getDeliveryDistance();
+			totalDist = Math.round(totalDist*100)/100;
+			CDisplay.append(", Dist:" + totalDist);*/
 			CDisplay.append(", Dist:" + restaurant.getCustomerByIndex(i).getDeliveryDistance());
 			CDisplay.append(", X:" + restaurant.getCustomerByIndex(i).getLocationX());
 			CDisplay.append(", Y:" + restaurant.getCustomerByIndex(i).getLocationY());
