@@ -73,9 +73,9 @@ public class CustomerFactoryTests {
 		cus1 = CustomerFactory.getCustomer("PUC","Testing", "0412456789",5,6);
 		
 		Customer cus2;
-		cus2 = CustomerFactory.getCustomer("PUC","Blarb", "0412456789",5,6);
+		cus2 = CustomerFactory.getCustomer("PUC","Testing", "0412456789",5,6);
 		
-		assertNotEquals(cus1,cus2);
+		assertNotEquals(cus1.hashCode(),cus2.hashCode());
 		
 	}
 	
@@ -85,9 +85,9 @@ public class CustomerFactoryTests {
 		cus1 = CustomerFactory.getCustomer("DNC","Testing", "0412456789",5,6);
 		
 		Customer cus2;
-		cus2 = CustomerFactory.getCustomer("DNC","Blarb", "0412456789",5,6);
+		cus2 = CustomerFactory.getCustomer("DNC","Testing", "0412456789",5,6);
 		
-		assertNotEquals(cus1,cus2);
+		assertNotEquals(cus1.hashCode(),cus2.hashCode());
 		
 	}
 	
@@ -97,9 +97,9 @@ public class CustomerFactoryTests {
 		cus1 = CustomerFactory.getCustomer("DVC","Testing", "0412456789",5,6);
 		
 		Customer cus2;
-		cus2 = CustomerFactory.getCustomer("DVC","Blarb", "0412456789",5,6);
+		cus2 = CustomerFactory.getCustomer("DVC","Testing", "0412456789",5,6);
 		
-		assertNotEquals(cus1,cus2);
+		assertNotEquals(cus1.hashCode(),cus2.hashCode());
 		
 	}
 	
