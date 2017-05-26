@@ -81,6 +81,16 @@ public class CustomerTests {
 		test3 = new DroneDeliveryCustomer("Leo", "1",1,2);
 	}
 	
+	@Test (expected=CustomerException.class)
+	public void errorNumberDigit() throws CustomerException{
+		test1 = new PickUpCustomer("Leo", "1234567890", 1,2);
+	}
+	
+	@Test (expected=CustomerException.class)
+	public void errorNumberString() throws CustomerException{
+		test1 = new PickUpCustomer("Leo", "0bcdefghij", 1,2);
+	}
+	
 	//Get name test
 	@Test
 	public void getNameTestPickUp(){
