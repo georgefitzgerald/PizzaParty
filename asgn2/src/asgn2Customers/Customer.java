@@ -50,9 +50,9 @@ public abstract class Customer {
 		else if (mobileNumber.length() != 10 || !mobileNumber.startsWith("0")){
 			throw new CustomerException("Mobile number out of bounds");
 		}
-		else if (mobileNumber.contains("[a-zA-Z]+") == true){
+		else if (mobileNumber.matches("[0-9]+") == false){
 			throw new CustomerException("Mobile number contains Characters");
-		}
+		} 
 		//if any of the other fields are null throw exception
 		else if (name==null){
 			throw new CustomerException("Null field");
