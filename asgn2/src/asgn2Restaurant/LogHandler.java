@@ -117,6 +117,9 @@ public class LogHandler {
 	 * @return- A Customer object containing the information from the line in the log file
 	 * @throws CustomerException - If the log file contains semantic errors leading that violate the customer constraints listed in Section 5.3 of the Assignment Specification or contain an invalid customer code (passed by another class).
 	 * @throws LogHandlerException - If there was a problem parsing the line from the log file.
+	 * @throws LogHandlerException - If missing data in line. 
+	 * @throws LogHandlerException - If missing data isn't incorrect type
+	 *
 	 */
 	public static Customer createCustomer(String line) throws CustomerException, LogHandlerException{
 		// TO DO
@@ -141,6 +144,9 @@ public class LogHandler {
 	 * @return- A Pizza object containing the information from the line in the log file
 	 * @throws PizzaException If the log file contains semantic errors leading that violate the pizza constraints listed in Section 5.3 of the Assignment Specification or contain an invalid pizza code (passed by another class).
 	 * @throws LogHandlerException - If there was a problem parsing the line from the log file.
+ 	 * @throws LogHandlerException - If missing data in line. 
+	 * @throws LogHandlerException - If missing data isn't incorrect type
+	 *
 	 */
 	public static Pizza createPizza(String line) throws PizzaException, LogHandlerException{
 		// TO DO
