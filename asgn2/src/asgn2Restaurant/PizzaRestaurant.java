@@ -72,7 +72,7 @@ public class PizzaRestaurant {
 	 * @param index - The index within the customers field to retrieve.
 	 * @return The Customer object located at the specified index.
 	 * @throws CustomerException if index is invalid.
-	 * throws when customer of specific index does not exist
+	 * @throws when customer of specific index does not exist
 	 */
 	public Customer getCustomerByIndex(int index) throws CustomerException{
 		
@@ -88,7 +88,7 @@ public class PizzaRestaurant {
 	 * @param index - The index within the pizzas field to retrieve.
 	 * @return The Pizza object located at the specified index.
 	 * @throws PizzaException if index is invalid.
-	 * throws if the specific index does not exist
+	 * @throws if the specific index does not exist
 	 * 
 	 */	
 	public Pizza getPizzaByIndex(int index) throws PizzaException{
