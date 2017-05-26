@@ -51,10 +51,9 @@ public abstract class Pizza  {
 	 * @param type -  A human understandable description of this Pizza type
 	 * @param price - The price that the pizza is sold to the customer
 	 * @throws PizzaException if supplied parameters are invalid 
-	 *  throws when the quantity of order is more than the maximum amount possible (e.g. 10)
-	 *  throws when ordered quantity is smaller than minimum amount (e.g. 1)
-	 *  throws when the order is made before or after the minimum and maximum order time
-	 *	(e.g. Accepts order only between 7pm and 10pm)
+	 * @throws when the quantity of order is more than the maximum amount possible (e.g. 10)
+	 * @throws when ordered quantity is smaller than minimum amount (e.g. 1)
+	 * @throws when the order is made before or after the minimum and maximum order time (e.g. Accepts order only between 7pm and 10pm)
 	 */
 	public Pizza(int quantity, LocalTime orderTime, LocalTime deliveryTime, String type, double price) throws PizzaException{
 		// TO DO
