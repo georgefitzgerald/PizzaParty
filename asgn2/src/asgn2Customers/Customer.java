@@ -32,8 +32,11 @@ public abstract class Customer {
 	 * @param locationX - The customer x location relative to the Pizza Palace Restaurant measured in units of 'blocks' 
 	 * @param locationY - The customer y location relative to the Pizza Palace Restaurant measured in units of 'blocks' 
 	 * @param type - A human understandable description of this Customer type
-	 * @throws CustomerException if supplied parameters are invalid 
-	 * 
+	 * @throws CustomerException if supplied parameters are invalid: 
+	 * @throws If name has no length or name length is greater than 21
+	 * @throws If the name is white spaces
+	 * @throws Mobile number isn't ten digits long or starts with 0
+	 * @throws Mobile number  
 	 */	
 	public Customer(String name, String mobileNumber, int locationX, int locationY, String type) throws CustomerException{
 
@@ -47,6 +50,9 @@ public abstract class Customer {
 		else if (mobileNumber.length() != 10 || !mobileNumber.startsWith("0")){
 			throw new CustomerException("Mobile number out of bounds");
 		}
+		else if (mobileNumber.matches("[0-9]+") == false){
+			throw new CustomerException("Mobile number contains Characters");
+		} 
 		//if any of the other fields are null throw exception
 		else if (name==null){
 			throw new CustomerException("Null field");
