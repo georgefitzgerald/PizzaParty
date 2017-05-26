@@ -260,9 +260,13 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 
 			            try {
 							restaurant.processLog(file.getPath());
-						} catch (CustomerException | PizzaException | LogHandlerException e2) {
+						} catch ( LogHandlerException e2) {
 							System.out.println("Exception thrown by process log");
 							JOptionPane.showMessageDialog(null,"ALERT MESSAGE","Error loading file",JOptionPane.WARNING_MESSAGE);
+						} catch (CustomerException e2){
+							JOptionPane.showMessageDialog(null,"ALERT MESSAGE","Error in Customer Data",JOptionPane.WARNING_MESSAGE);
+						} catch (PizzaException e2){
+							JOptionPane.showMessageDialog(null,"ALERT MESSAGE","Error in pizza Data",JOptionPane.WARNING_MESSAGE);
 						}
 
 			            //Display Each Customer as line of text
