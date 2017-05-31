@@ -56,11 +56,6 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 	private JScrollPane scroll1;
 	private JScrollPane scroll2;
 
-
-	
-	//temp variable for loading using loghandler instead of pizza restuarant
-    private ArrayList<Customer> customerArr = new ArrayList<Customer>();
-	
 	/**
 	 * Creates a new Pizza GUI with the specified title 
 	 * @param title - The title for the supertype JFrame
@@ -77,6 +72,9 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 		// TO DO
 	}
 	
+	/**
+	 * Create all the gui components on the correct panels. 
+	 */
 	private void createGUI() { 
 		setSize(WIDTH, HEIGHT);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -109,8 +107,8 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 		this.setVisible(true);
 	}
 	
-	/*
-	 * Create panel with specified colour
+	/**
+	 * Create panel with specified colour.
 	 */
 	private JPanel createPanel(Color c) {
 		//Create a JPanel object and store it in a local var
@@ -121,8 +119,8 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 		return temp;
 	}
 	
-	/*
-	 * Create Label
+	/**
+	 * Create Label object. 
 	 */
 	private JLabel createLabel(String str){
 		JLabel notifyline1 = new JLabel();
@@ -130,8 +128,8 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
         return notifyline1;
 	}
 	
-	/*
-	 * Create Button
+	/**
+	 * Create Button object.
 	 */
 	private JButton createButton(String str) {
 		//Create a JButton object and store it in a local var
@@ -146,7 +144,6 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 	
 	/**
 	 * Add buttons to button panel
-	 * Refactor to call method for creating the grid
 	 */
 	private void layoutButtonPanel() {
 		GridBagLayout layout = new GridBagLayout();
@@ -164,7 +161,9 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 		addToPanel(pnlBtn, btnTotals,constraints,2,0,1,1);
 	} 
 	
-	
+	/**
+	 * Add buttons to the bottom panel for totals. 
+	 */
 	private void totalsLabelPanel(){
 		GridBagLayout layout = new GridBagLayout();
 		pnlTotals.setLayout(layout);
@@ -180,6 +179,9 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 		addToPanel(pnlTotals, labProf,constraints,1,0,1,1);
 	}
 	
+	/**
+	 * Add the text boxes to the middle panel. 
+	 */
 	private void createTextBoxLayout(){
 		GridBagLayout layout = new GridBagLayout();
 		pnlTable.setLayout(layout);
@@ -189,12 +191,6 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 		scroll1 = new JScrollPane(CDisplay); //place the JTextArea in a scroll pane
 		scroll2 = new JScrollPane(PDisplay, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
                 JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-/*		JScrollBar bar = scroll1.getVerticalScrollBar();
-		bar.setPreferredSize(new Dimension(40, 0));*/
-
-		//panel.add(scroll, BorderLayout.CENTER);
-		
-		//add components to grid
 		GridBagConstraints constraints = new GridBagConstraints();
 		//Defaults
 		constraints.fill = GridBagConstraints.HORIZONTAL;
@@ -228,6 +224,10 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 		jp.add(c, constraints);
 	}
 	
+	/**
+	 * Creates a text area to be added to panel. 
+	 * @return Jtext Area
+	 */
 	private JTextArea displayTextArea(){
 
 		JTextArea tempDisplay = new JTextArea();
@@ -299,8 +299,8 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 				}
 	}
 	
-	/*
-	 * Display Each Customer as line in text box
+	/**
+	 * Display Each Customer as line in text box.
 	 */
 	private void DisplayText() throws CustomerException, PizzaException{
 		//areDisplay.setText(customerArr.get(0).toString());
@@ -309,10 +309,11 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 			CDisplay.append("\n"+restaurant.getCustomerByIndex(i).getName());
 			CDisplay.append(", Type:" + restaurant.getCustomerByIndex(i).getCustomerType());
 			CDisplay.append(", Num:" + restaurant.getCustomerByIndex(i).getMobileNumber());
-/*			double totalDist = restaurant.getCustomerByIndex(i).getDeliveryDistance();
-			totalDist = Math.round(totalDist*100)/100;
-			CDisplay.append(", Dist:" + totalDist);*/
-			CDisplay.append(", Dist:" + restaurant.getCustomerByIndex(i).getDeliveryDistance());
+			float totalDist = (float) restaurant.getCustomerByIndex(i).getDeliveryDistance();
+			totalDist = totalDist*100;
+			totalDist = Math.round(totalDist);
+			totalDist = totalDist/100;
+			CDisplay.append(", Dist:" + totalDist);
 			CDisplay.append(", X:" + restaurant.getCustomerByIndex(i).getLocationX());
 			CDisplay.append(", Y:" + restaurant.getCustomerByIndex(i).getLocationY());
 		}
@@ -325,6 +326,10 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 		}
 	}
 	
+	/**
+	 * Reset the text fields such that no customer or pizza data is displayed. 
+	 * 
+	 */
 	private void resetEverything(){
 		//clear the pizza restuarant display and data
 		CDisplay.setText("");
@@ -335,47 +340,6 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 		labProf.setText("Total Profit: ");
 	}
 	
-	private String ConvertCustCode(String code){
-		if (code.equals("PUD")){
-			return "Pick UP";
-		}
-		else if (code.equals("DVC")){
-			return "Delivery Driver";
-		}
-		else if (code.equals("DNC")){
-			return "Drone Delivery";
-		}
-		else return null;
-	}
-	
-	/*
-	 * Display Restaurant data in jtable. 
-	 */
-	private void DisplayDaysData(){
-		//create two dimensional string array for restaurant data
-		String data[][] = customers2dArr();
-		//create column string array for column labels
-		String column[] = customerFieldsArr();
-		//create jtable
-		JTable jt = new JTable(data, column);
-		//jt.setBounds(30,40,200,300);
-		//make scrollable 
-	    JScrollPane sp=new JScrollPane(jt);    
-	    //add to jFrame
-	    this.getContentPane().add(sp, BorderLayout.CENTER);
-	    //this.add(sp);
-	}
-	
-	private String[][] customers2dArr(){
-		String data[][] = null;
-		
-		return data;
-	}
-	
-	private String[] customerFieldsArr(){
-		String columns[] = null;
-		return columns;
-	}
 	
 	/**
 	 * @param args
