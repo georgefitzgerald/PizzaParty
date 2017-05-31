@@ -33,7 +33,7 @@ public class VegetarianPizza extends Pizza {
 	 *
 	 */
 	public VegetarianPizza(int quantity, LocalTime orderTime, LocalTime deliveryTime) throws PizzaException {
-		// TO DO
+
 		super(quantity, orderTime, deliveryTime, "Vegetarian", 10);
 		
 		top.add(PizzaTopping.TOMATO);
