@@ -53,10 +53,6 @@ public abstract class Customer {
 		else if (mobileNumber.matches("[0-9]+") == false){
 			throw new CustomerException("Mobile number contains Characters");
 		} 
-		//if any of the other fields are null throw exception
-		else if (name==null){
-			throw new CustomerException("Null field");
-		}
 		else {
 			// set constructor variables to private variables
 			LocationX = locationX;
