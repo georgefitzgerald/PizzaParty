@@ -68,6 +68,11 @@ public class LogHandler {
 			
     	} while (!end);
 		
+		try {
+			br.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		return customerArr;
 	}		
 
@@ -80,7 +85,6 @@ public class LogHandler {
 	 * 
 	 */
 	public static ArrayList<Pizza> populatePizzaDataset(String filename) throws PizzaException, LogHandlerException{
-		// TO DO
 		ArrayList<Pizza> pizzaArr = new ArrayList<Pizza>();
 		
 		BufferedReader br = null;
@@ -105,7 +109,12 @@ public class LogHandler {
 				}
 
 		} while (!end);
-		
+
+		try {
+			br.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		return pizzaArr;
 	}		
 
@@ -122,14 +131,12 @@ public class LogHandler {
 	 *
 	 */
 	public static Customer createCustomer(String line) throws CustomerException, LogHandlerException{
-		// TO DO
 		//create string array for each field of line
    	    //otime, dtime, name, number, code, x, y
 		String[] lineArr;
 		try{
 			lineArr = line.split(COMMA);
 		} catch (PatternSyntaxException e) {throw new LogHandlerException();}
-		//System.out.println("LogHandler: Mobile Number " + lineArr[2]);
 		try{
 			return CustomerFactory.getCustomer(lineArr[4].trim(), lineArr[2], lineArr[3], Integer.parseInt(lineArr[5]), Integer.parseInt(lineArr[6]));
 		}	catch (ArrayIndexOutOfBoundsException e){throw new LogHandlerException();}
@@ -149,7 +156,8 @@ public class LogHandler {
 	 *
 	 */
 	public static Pizza createPizza(String line) throws PizzaException, LogHandlerException{
-		// TO DO
+		//create string array for each field of line
+   	    //quantity, otime, dtime, pizza code
 		String[] lineArr;
 		try{
 			lineArr = line.split(COMMA);

@@ -35,7 +35,7 @@ public class MargheritaPizza extends Pizza {
 	 *
 	 */
 	public MargheritaPizza(int quantity, LocalTime orderTime, LocalTime deliveryTime) throws PizzaException {
-		// TO DO
+		
 		super(quantity, orderTime, deliveryTime, "Margherita", 8);
 		
 		top.add(PizzaTopping.TOMATO);
