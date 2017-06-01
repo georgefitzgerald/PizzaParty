@@ -134,6 +134,36 @@ public class PizzaTests {
 			MargheritaPizza marg = new MargheritaPizza(1, otime, dtime);
 		}
 		
+		//Throws exception if delivery time is an hour and ten minutes greater than ordertime 
+		@Test (expected=PizzaException.class)
+		public void PizzaExceptionCookedToolong() throws PizzaException{
+			otime = LocalTime.of(19, 00, 00, 0);
+			dtime = LocalTime.of(20, 10, 00, 0);
+			MargheritaPizza marg = new MargheritaPizza(1, otime, dtime);
+		}
+	
+		@Test (expected=PizzaException.class)
+		public void PizzaExceptionCookedOneSecToolong() throws PizzaException{
+			otime = LocalTime.of(19, 00, 00, 0);
+			dtime = LocalTime.of(20, 10, 01, 0);
+			MargheritaPizza marg = new MargheritaPizza(1, otime, dtime);
+		}
+		
+		@Test (expected=PizzaException.class)
+		public void PizzaExceptionCookedWayToolong() throws PizzaException{
+			otime = LocalTime.of(19, 00, 00, 0);
+			dtime = LocalTime.of(20, 50, 01, 0);
+			MargheritaPizza marg = new MargheritaPizza(1, otime, dtime);
+		}
+		
+		
+		@Test 
+		public void PizzaExceptionCookedAlmostToolong() throws PizzaException{
+			otime = LocalTime.of(19, 00, 00, 0);
+			dtime = LocalTime.of(20, 9, 59, 0);
+			MargheritaPizza marg = new MargheritaPizza(1, otime, dtime);
+		}
+		
 	//Calculate cost per pizza and getcostperpizza
 		
 		@Test //check cost for margherita is correct
@@ -234,7 +264,7 @@ public class PizzaTests {
 		
 		
 		
-	//Get order price commetted out until price is corrected
+	//Get order price commented out until price is corrected
 		
 		@Test //check order price for 1 margherita is correct
 		public void MargheritaOrderPrice1() throws PizzaException{
