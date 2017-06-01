@@ -95,6 +95,7 @@ public class PizzaTests {
 		@Test 
 		public void MargheritaExceptionOrdertime18() throws PizzaException{
 			otime = LocalTime.of(19, 00, 0, 0);
+			dtime = LocalTime.of(19, 27, 0, 0);
 			MargheritaPizza marg = new MargheritaPizza(1, otime, dtime);
 		}
 			

@@ -29,7 +29,7 @@ public abstract class Pizza  {
 	final LocalTime minOrderTime = LocalTime.of(19, 00, 00);
 	final LocalTime maxOrderTime = LocalTime.of(22, 59, 59);
 	final long cookDel = 11000;
-	final LocalTime throwOut = LocalTime.of(orderTime.plusHours(1).getHour(), orderTime.plusMinutes(10).getMinute());
+	final LocalTime throwOut;
 	
 	protected String type;
 	
@@ -63,7 +63,8 @@ public abstract class Pizza  {
 		this.deliveryTime = deliveryTime;
 		this.type = type;
 		this.price = price;
-		
+		this.throwOut = LocalTime.of(orderTime.plusHours(1).getHour(), orderTime.plusMinutes(9).getMinute(),59);
+	
 		if(this.quantity > maxQuan || this.quantity < minQuan){
 			throw new PizzaException("Order is out of bounds."); 
 		}
