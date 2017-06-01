@@ -91,6 +91,30 @@ public class CustomerTests {
 		test1 = new PickUpCustomer("Leo", "0bcdefghij", 1,2);
 	}
 	
+	@Test (expected=CustomerException.class)
+	public void carDeliveryWhenInStore() throws CustomerException{
+		test2 = new DriverDeliveryCustomer("Leo", "0434948394",0,0);
+	}
+	
+	@Test (expected=CustomerException.class)
+	public void droneDeliveryWhenInStore() throws CustomerException{
+		test3 = new DroneDeliveryCustomer("Leo", "0434948394",0,0);
+	}
+	
+	@Test(expected = CustomerException.class)
+	public void deliveryTooFarAwayX() throws CustomerException{
+		test2 = new DriverDeliveryCustomer("Loe", "0491839271", 11, 9);
+	}
+	
+	@Test(expected = CustomerException.class)
+	public void deliveryTooFarAwayY() throws CustomerException{
+		test2 = new DriverDeliveryCustomer("Loe", "0491839271", 1, 11);
+	}
+	
+	
+	
+	
+	
 	//Get name test
 	@Test
 	public void getNameTestPickUp(){
