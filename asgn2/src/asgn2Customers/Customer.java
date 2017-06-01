@@ -42,18 +42,21 @@ public abstract class Customer {
 
 		//between 1 and 20 characters not just white spaces
 		if(name.length() <= 0 || name.length() > 21){
-			throw new CustomerException("Letter out of bounds");
+			throw new CustomerException("Letter out of bounds.");
 		}
 		else if (name.trim() == null){
-			throw new CustomerException("White Space Name");
+			throw new CustomerException("White Space Name.");
 		}
 		else if (mobileNumber.length() != 10 || !mobileNumber.startsWith("0")){
-			throw new CustomerException("Mobile number out of bounds");
+			throw new CustomerException("Mobile number out of bounds.");
 		}
 		else if (mobileNumber.matches("[0-9]+") == false){
-			throw new CustomerException("Mobile number contains Characters");
+			throw new CustomerException("Mobile number contains Characters.");
 		} 
-		else {
+		else if (locationX > 10 || locationX < -10 || locationY > 10 || locationY < -10)
+		{
+			throw new CustomerException("Distance to deliver is too far.");
+		} else {
 			// set constructor variables to private variables
 			LocationX = locationX;
 			LocationY = locationY;
