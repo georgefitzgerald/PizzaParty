@@ -30,6 +30,9 @@ public class DroneDeliveryCustomer extends Customer {
 	 */
 	public DroneDeliveryCustomer(String name, String mobileNumber, int locationX, int locationY) throws CustomerException {
 		super(name, mobileNumber, locationX, locationY, "DroneDelivery");
+		if (locationX == 0 && locationY ==0){
+			throw new CustomerException("Won't drone to customer at restaurant");
+		}
 	}
 
 	/**

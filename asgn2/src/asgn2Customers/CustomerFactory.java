@@ -42,22 +42,12 @@ public class CustomerFactory {
 			return tempCustomer;
 		}
 		else if (customerCode.equals("DNC")){
-			if (locationX == 0 && locationY ==0){
-				throw new CustomerException("Won't drone to customer at restaurant");
-			}
-			else {
-				tempCustomer = new DroneDeliveryCustomer(name, mobileNumber, locationX,  locationY);
-				return tempCustomer;
-			}
+			tempCustomer = new DroneDeliveryCustomer(name, mobileNumber, locationX,  locationY);
+			return tempCustomer;			
 		}
 		else if (customerCode.equals("DVC")){
-			if (locationX == 0 && locationY ==0){
-				throw new CustomerException("Won't deliver to customer at restaurant");
-			}
-			else {
-				tempCustomer = new DriverDeliveryCustomer(name, mobileNumber, locationX,  locationY);
-				return tempCustomer;
-			}
+			tempCustomer = new DriverDeliveryCustomer(name, mobileNumber, locationX,  locationY);
+			return tempCustomer;
 		}
 		else {		
 	        throw new CustomerException();

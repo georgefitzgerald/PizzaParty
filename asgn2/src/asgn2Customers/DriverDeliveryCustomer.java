@@ -28,9 +28,10 @@ public class DriverDeliveryCustomer extends Customer {
 	 * 
 	 */
 	public DriverDeliveryCustomer(String name, String mobileNumber, int locationX, int locationY) throws CustomerException {
-		//System.out.println("DDC: Mobile Number " + mobileNumber);
-
 		super(name, mobileNumber, locationX, locationY, "DriverDelivery");
+		if (locationX == 0 && locationY ==0){
+			throw new CustomerException("Won't deliver to customer at restaurant");
+		}
 	}
 	
 	/**
