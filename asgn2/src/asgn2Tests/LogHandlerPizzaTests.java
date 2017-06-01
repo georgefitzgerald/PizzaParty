@@ -2,7 +2,6 @@ package asgn2Tests;
 
 import static org.junit.Assert.*;
 
-import java.io.File;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -16,7 +15,7 @@ import asgn2Restaurant.LogHandler;
 
 /** A class that tests the methods relating to the creation of Pizza objects in the asgn2Restaurant.LogHander class.
 * 
-* @author Person B
+* @author George Fitzgerald
 * 
 */
 public class LogHandlerPizzaTests {

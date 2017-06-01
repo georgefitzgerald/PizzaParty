@@ -15,7 +15,7 @@ import asgn2Pizzas.PizzaTopping;
  * Each of these subclasses have a different set of toppings. A description of the class's fields
  * and their constraints is provided in Section 5.1 of the Assignment Specification. 
  * 
- * @author Person A
+ * @author Seok Yoon
  *
  */
 public abstract class Pizza  {

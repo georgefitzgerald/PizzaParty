@@ -17,7 +17,7 @@ import asgn2Pizzas.Pizza;
  *  Any exceptions raised by one of the methods called by this class should be passed to asgn2GUIs.PizzaGUI so that it can be shown to
  *  the user.
  * 
- * @author Person A and Person B
+ * @author Seok Yoon and George Fitzgerald
  *
  */
 public class PizzaRestaurant {
@@ -53,7 +53,7 @@ public class PizzaRestaurant {
 	 * @throws CustomerException If the log file contains semantic errors leading that violate the customer constraints listed in Section 5.3 of the Assignment Specification or contain an invalid customer code (passed by another class).
 	 * @throws PizzaException If the log file contains semantic errors leading that violate the pizza constraints listed in Section 5.3 of the Assignment Specification or contain an invalid pizza code (passed by another class).
 	 * @throws LogHandlerException If there was a problem with the log file not related to the semantic errors above (passed by another class).
-     * @throws from related class (LogHandler.java)
+     * @throws LogHandlerException from related class (LogHandler.java)
 	 */
 	public boolean processLog(String filename) throws CustomerException, PizzaException, LogHandlerException{
 		
@@ -69,7 +69,7 @@ public class PizzaRestaurant {
 	 * @param index - The index within the customers field to retrieve.
 	 * @return The Customer object located at the specified index.
 	 * @throws CustomerException if index is invalid.
-	 * @throws when customer of specific index does not exist
+	 * @throws CustomerException when customer of specific index does not exist
 	 */
 	public Customer getCustomerByIndex(int index) throws CustomerException{
 		
@@ -85,7 +85,7 @@ public class PizzaRestaurant {
 	 * @param index - The index within the pizzas field to retrieve.
 	 * @return The Pizza object located at the specified index.
 	 * @throws PizzaException if index is invalid.
-	 * @throws if the specific index does not exist
+	 * @throws PizzaException if the specific index does not exist
 	 * 
 	 */	
 	public Pizza getPizzaByIndex(int index) throws PizzaException{
