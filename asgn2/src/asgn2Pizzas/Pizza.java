@@ -28,6 +28,8 @@ public abstract class Pizza  {
 	protected LocalTime deliveryTime;
 	final LocalTime minOrderTime = LocalTime.of(19, 00, 00);
 	final LocalTime maxOrderTime = LocalTime.of(22, 59, 59);
+	final long cookDel = 11000;
+	final LocalTime throwOut = LocalTime.of(orderTime.plusHours(1).getHour(), orderTime.plusMinutes(10).getMinute());
 	
 	protected String type;
 	
@@ -71,6 +73,10 @@ public abstract class Pizza  {
 		else if(this.orderTime.isAfter(maxOrderTime)){
 			throw new PizzaException("maximum Time order out of bounds.");
 		}
+		else if(this.deliveryTime.isAfter(throwOut)){
+			throw new PizzaException("Pizza is too old");
+		}
+		
 		top = new ArrayList<PizzaTopping>();
 	}
 
