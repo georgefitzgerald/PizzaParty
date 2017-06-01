@@ -77,33 +77,27 @@ public class PizzaTests {
 	
 	//Ordertime Exceptions
 		
-		//Throws exception if ordertime less than min order time of 18
+		//Throws exception if ordertime less than min order time of 19
 		@Test (expected=PizzaException.class)
 		public void MargheritaExceptionOrdertime17() throws PizzaException{
 			otime = LocalTime.of(17, 00, 0, 0);
 			MargheritaPizza marg = new MargheritaPizza(1, otime, dtime);
 		}
 	
-		//Throws exception if ordertime just less than min order time of 18
+		//Throws exception if ordertime just less than min order time of 10
 		@Test (expected=PizzaException.class)
 		public void MargheritaExceptionOrdertime175959() throws PizzaException{
-			otime = LocalTime.of(17, 59, 59, 0);
+			otime = LocalTime.of(18, 59, 59, 0);
 			MargheritaPizza marg = new MargheritaPizza(1, otime, dtime);
 		}
+		
 		//Don't throw exception if ordertime is 19
 		@Test 
 		public void MargheritaExceptionOrdertime18() throws PizzaException{
 			otime = LocalTime.of(19, 00, 0, 0);
 			MargheritaPizza marg = new MargheritaPizza(1, otime, dtime);
 		}
-	
-		//Throws exception if ordertime greater than order time of 22
-		@Test (expected=PizzaException.class)
-		public void MargheritaExceptionOrdertime22() throws PizzaException{
-			otime = LocalTime.of(23, 00, 0, 0);
-			MargheritaPizza marg = new MargheritaPizza(1, otime, dtime);
-		}
-		
+			
 		//Throws exception if ordertime is 23
 		@Test (expected=PizzaException.class)
 		public void MargheritaExceptionOrdertime23() throws PizzaException{
@@ -111,21 +105,21 @@ public class PizzaTests {
 			MargheritaPizza marg = new MargheritaPizza(1, otime, dtime);
 		}
 		
-		//Throws exception if ordertime greater than order time of 22 by minutes
+		//Throws exception if ordertime greater than order time of 23 by minutes
 		@Test (expected=PizzaException.class)
 		public void MargheritaExceptionOrdertime2301() throws PizzaException{
 			otime = LocalTime.of(23, 01, 0, 0);
 			MargheritaPizza marg = new MargheritaPizza(1, otime, dtime);
 		}
 	
-		//Throws exception if ordertime greater than order time of 22 by second
+		//Throws exception if ordertime greater than order time of 23 by second
 		@Test (expected=PizzaException.class)
 		public void MargheritaExceptionOrdertime230001() throws PizzaException{
 			otime = LocalTime.of(23, 00, 01, 0);
 			MargheritaPizza marg = new MargheritaPizza(1, otime, dtime);
 		}
 	
-		//Doesn't throw exception when order time is 11pm 
+		//Doesn't throw exception when order time is 10:59:59pm 
 		@Test 
 		public void MargheritaExceptionOrdertime225959() throws PizzaException{
 			otime = LocalTime.of(22, 59, 59, 0);
@@ -161,6 +155,16 @@ public class PizzaTests {
 			dtime = LocalTime.of(20, 9, 59, 0);
 			MargheritaPizza marg = new MargheritaPizza(1, otime, dtime);
 		}
+		
+		//don't throw exception if ordertime is before 11pm but delivery is after
+		@Test 
+		public void DeliveryAfterClosing() throws PizzaException{
+			otime = LocalTime.of(22, 40, 00, 0);
+			dtime = LocalTime.of(23, 40, 00, 0);
+			MargheritaPizza marg = new MargheritaPizza(1, otime, dtime);
+		}
+
+		
 		
 	//Calculate cost per pizza and getcostperpizza
 		
