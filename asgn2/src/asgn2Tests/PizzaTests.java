@@ -20,9 +20,7 @@ import asgn2Pizzas.MeatLoversPizza;
  * Note that an instance of asgn2Pizzas.MeatLoversPizza should be used to test the functionality of the 
  * asgn2Pizzas.Pizza abstract class. 
  * 
- * @author Person B
- * Questions:
- * How to test an abstract class directly? 
+ * @author George Fitzgerald
  * 
  */
 public class PizzaTests {
