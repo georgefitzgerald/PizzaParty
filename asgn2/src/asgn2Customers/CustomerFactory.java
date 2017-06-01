@@ -38,21 +38,28 @@ public class CustomerFactory {
 		Customer tempCustomer;
 		
 		if (customerCode.equals("PUC")){
-			tempCustomer = new PickUpCustomer(name, mobileNumber, locationX,  locationY);
+			tempCustomer = new PickUpCustomer(name, mobileNumber, 0,  0);
 			return tempCustomer;
 		}
 		else if (customerCode.equals("DNC")){
-			tempCustomer = new DroneDeliveryCustomer(name, mobileNumber, locationX,  locationY);
-			return tempCustomer;
-
+			if (locationX == 0 && locationY ==0){
+				throw new CustomerException("Won't drone to customer at restaurant");
+			}
+			else {
+				tempCustomer = new DroneDeliveryCustomer(name, mobileNumber, locationX,  locationY);
+				return tempCustomer;
+			}
 		}
 		else if (customerCode.equals("DVC")){
-			tempCustomer = new DriverDeliveryCustomer(name, mobileNumber, locationX,  locationY);
-			return tempCustomer;
-
+			if (locationX == 0 && locationY ==0){
+				throw new CustomerException("Won't deliver to customer at restaurant");
+			}
+			else {
+				tempCustomer = new DriverDeliveryCustomer(name, mobileNumber, locationX,  locationY);
+				return tempCustomer;
+			}
 		}
 		else {		
-	        //System.out.println("Invalid CustomerCode" + customerCode);
 	        throw new CustomerException();
         }
 	}
