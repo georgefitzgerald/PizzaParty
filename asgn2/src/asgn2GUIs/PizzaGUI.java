@@ -44,6 +44,7 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 	private PizzaRestaurant restaurant;
 	//Jframe elements
 	private JPanel pnlBtn;
+	private JButton btnShow;
 	private JPanel pnlTotals;
 	private JLabel labDist;
 	private JLabel labProf;
@@ -55,6 +56,7 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 	private JPanel pnlTable;
 	private JScrollPane scroll1;
 	private JScrollPane scroll2;
+	private Boolean loaded = false;
 
 	/**
 	 * Creates a new Pizza GUI with the specified title 
@@ -95,6 +97,7 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 		btnLoad = createButton("Load"); 
 		btnReset = createButton("Reset");
 		btnTotals = createButton("Totals");
+		btnShow = createButton("Show");
 		
 		labDist = createLabel("Total Distance: ");
 		labProf = createLabel("Total Profit: ");
@@ -156,9 +159,12 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 		constraints.anchor = GridBagConstraints.CENTER;
 		constraints.weightx = 100;
 		constraints.weighty = 100;
+		
+
 		addToPanel(pnlBtn, btnLoad,constraints,0,0,1,1);
-		addToPanel(pnlBtn, btnReset,constraints,1,0,1,1);
-		addToPanel(pnlBtn, btnTotals,constraints,2,0,1,1);
+		addToPanel(pnlBtn, btnShow,constraints,1,0,1,1);
+		addToPanel(pnlBtn, btnReset,constraints,2,0,1,1);
+		addToPanel(pnlBtn, btnTotals,constraints,3,0,1,1);
 	} 
 	
 	/**
@@ -260,6 +266,8 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 
 			            try {
 							restaurant.processLog(file.getPath());
+							JOptionPane.showMessageDialog(null, "Loaded Database");
+							loaded= true;
 						} catch ( LogHandlerException e2) {
 							System.out.println("Exception thrown by process log");
 							JOptionPane.showMessageDialog(null,"ALERT MESSAGE","Error loading file",JOptionPane.WARNING_MESSAGE);
@@ -268,34 +276,43 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 						} catch (PizzaException e2){
 							JOptionPane.showMessageDialog(null,"ALERT MESSAGE","Error in pizza Data",JOptionPane.WARNING_MESSAGE);
 						}
-
-			            //Display Each Customer as line of text
+			   
+						
+					}
+				}
+				
+				if(src==btnShow){
+					  //Display Each Customer as line of text
+					if (loaded){									
 			            try {
 							DisplayText();
+							JOptionPane.showMessageDialog(null, "Displayed Data");
+
 						} catch (CustomerException | PizzaException e1) {
 							System.out.println("Exception thrown by display");
 							JOptionPane.showMessageDialog(null,"ALERT MESSAGE","Error displaying file",JOptionPane.WARNING_MESSAGE);
-
-						}  
-						JOptionPane.showMessageDialog(null, "Loaded Database");
-
+							
+						}
 					}
-
 				}
+				
 				//Total Distance (need to implement restaurant correctly)
 				if (src==btnTotals) {
-					double totalDist = restaurant.getTotalDeliveryDistance();
-					totalDist = Math.round(totalDist*100)/100;
-					labDist.setText("Total Distance: " + totalDist)	;
-					//if profit is integer print no decimals else print two
-					labProf.setText("Total Profit: " +restaurant.getTotalProfit())	;
-					JOptionPane.showMessageDialog(null, "Displayed Totals");
-
+					if (loaded){
+						double totalDist = restaurant.getTotalDeliveryDistance();
+						totalDist = Math.round(totalDist*100)/100;
+						labDist.setText("Total Distance: " + totalDist)	;
+						//if profit is integer print no decimals else print two
+						labProf.setText("Total Profit: " +restaurant.getTotalProfit())	;
+						JOptionPane.showMessageDialog(null, "Displayed Totals");
+					}
 				}
 				if (src==btnReset){
-					resetEverything();
-					JOptionPane.showMessageDialog(null, "Reset");
-
+					if(loaded){
+						resetEverything();
+						JOptionPane.showMessageDialog(null, "Reset");
+						loaded= false;
+					}
 				}
 	}
 	
