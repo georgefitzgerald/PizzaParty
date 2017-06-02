@@ -72,40 +72,40 @@ public class LogHandlerPizzaTests {
 		//Correct Pizza classes created 
 			@Test //marg
 			public void CorrectCreatePizzaMarg() throws PizzaException, LogHandlerException{
-				String line = "21:17:00,21:27:00,Emma Brown,0602547760,DVC,-1,0,PZM,5";
+				String line = "21:17:00,22:10:00,Emma Brown,0602547760,DVC,-1,0,PZM,5";
 				pizza = LogHandler.createPizza(line);
 				assertEquals(pizza.getPizzaType(), "Margherita");
 			}
 			
 			@Test //meat
 			public void CorrectCreatePizzaMeat() throws PizzaException, LogHandlerException{
-				String line = "21:17:00,21:27:00,Emma Brown,0602547760,DVC,-1,0,PZL,5";
+				String line = "21:17:00,21:28:00,Emma Brown,0602547760,DVC,-1,0,PZL,5";
 				pizza = LogHandler.createPizza(line);
 				assertEquals(pizza.getPizzaType(), "Meat Lovers");
 			}
 			
 			@Test //vege
 			public void CorrectCreatePizzaVege() throws PizzaException, LogHandlerException{
-				String line = "21:17:00,21:27:00,Emma Brown,0602547760,DVC,-1,0,PZV,5";
+				String line = "21:17:00,21:28:00,Emma Brown,0602547760,DVC,-1,0,PZV,5";
 				pizza = LogHandler.createPizza(line);
 				assertEquals(pizza.getPizzaType(), "Vegetarian");
 			}
 		//correct parameters parsed to it (quantity) how to check order time!!!!!!!!
 			@Test //vege
 			public void CorrectQuantityPizzaVege() throws PizzaException, LogHandlerException{
-				String line = "21:17:00,21:27:00,Emma Brown,0602547760,DVC,-1,0,PZV,5";
+				String line = "21:17:00,21:28:00,Emma Brown,0602547760,DVC,-1,0,PZV,5";
 				pizza = LogHandler.createPizza(line);
 				assertEquals(pizza.getQuantity(), 5, 0);
 			}
 			@Test 
 			public void CorrectQuantityPizzaMeat() throws PizzaException, LogHandlerException{
-				String line = "21:17:00,21:27:00,Emma Brown,0602547760,DVC,-1,0,PZL,1";
+				String line = "21:17:00,21:28:00,Emma Brown,0602547760,DVC,-1,0,PZL,1";
 				pizza = LogHandler.createPizza(line);
 				assertEquals(pizza.getQuantity(), 1, 0);
 			}
 			@Test 
 			public void CorrectQuantityPizzaMarg() throws PizzaException, LogHandlerException{
-				String line = "21:17:00,21:27:00,Emma Brown,0602547760,DVC,-1,0,PZM,9";
+				String line = "21:17:00,21:28:00,Emma Brown,0602547760,DVC,-1,0,PZM,9";
 				pizza = LogHandler.createPizza(line);
 				assertEquals(pizza.getQuantity(), 9, 0);
 			}
@@ -128,7 +128,7 @@ public class LogHandlerPizzaTests {
 
 				Path currentRelativePath = Paths.get("");
 				String s = currentRelativePath.toAbsolutePath().toString();
-				String path = s + "\\logs\\20170102.txt";
+				String path = s + "\\logs\\20170101.txt";
 				
 				
 				pizzaArr2 = LogHandler.populatePizzaDataset(path);

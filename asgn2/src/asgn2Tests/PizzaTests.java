@@ -127,18 +127,18 @@ public class PizzaTests {
 			MargheritaPizza marg = new MargheritaPizza(1, otime, dtime);
 		}
 		
-		//Throws exception if delivery time is an hour and ten minutes greater than ordertime 
+		//Throws exception if delivery time is an hour greater than ordertime 
 		@Test (expected=PizzaException.class)
 		public void PizzaExceptionCookedToolong() throws PizzaException{
 			otime = LocalTime.of(19, 00, 00, 0);
-			dtime = LocalTime.of(20, 10, 00, 0);
+			dtime = LocalTime.of(20, 00, 01, 0);
 			MargheritaPizza marg = new MargheritaPizza(1, otime, dtime);
 		}
 	
 		@Test (expected=PizzaException.class)
 		public void PizzaExceptionCookedOneSecToolong() throws PizzaException{
 			otime = LocalTime.of(19, 00, 00, 0);
-			dtime = LocalTime.of(20, 10, 01, 0);
+			dtime = LocalTime.of(20, 00, 01, 0);
 			MargheritaPizza marg = new MargheritaPizza(1, otime, dtime);
 		}
 		
@@ -153,7 +153,7 @@ public class PizzaTests {
 		@Test 
 		public void PizzaExceptionCookedAlmostToolong() throws PizzaException{
 			otime = LocalTime.of(19, 00, 00, 0);
-			dtime = LocalTime.of(20, 9, 59, 0);
+			dtime = LocalTime.of(19, 9, 59, 0);
 			MargheritaPizza marg = new MargheritaPizza(1, otime, dtime);
 		}
 		
